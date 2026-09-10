@@ -784,3 +784,24 @@
   padding: 10px 16px;
   border-top: 1px solid var(--border);
 }
+
+
+/* ==========================================================================
+   Quiz builder question rows
+   ========================================================================== */
+
+.question { padding: 16px 20px; }
+
+.question-n {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-pill);
+  background: var(--mint-fill);
+  color: var(--primary-hover);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  flex-shrink: 0;
+}

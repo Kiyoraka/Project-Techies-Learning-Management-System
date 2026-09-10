@@ -1,0 +1,170 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settings — Techies LMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/controls.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/screens.css">
+
+<body data-role="instructor" data-route="inst.settings" data-title="Settings">
+
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="app-main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content">
+
+      <div class="page-head">
+        <div>
+          <h1 class="page-title">Settings</h1>
+          <p class="page-sub">Your public profile, notifications and payout details.</p>
+        </div>
+        <button class="btn btn-primary" data-toast="save">Save changes</button>
+      </div>
+
+      <div class="tabs" data-tabs="inst">
+        <button class="tab is-active" data-tab="Profile">Profile</button>
+        <button class="tab" data-tab="Notifications">Notifications</button>
+        <button class="tab" data-tab="Payout">Payout</button>
+      </div>
+
+      <!-- ================= Profile ================= -->
+      <div data-tab-panel="inst:Profile">
+        <div class="settings-grid">
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Public profile</h2>
+            <div class="row" style="gap:14px;margin-bottom:20px" id="inst-avatar-row"></div>
+            <div class="field">
+              <label class="label" for="i-name">Display name</label>
+              <input class="input" id="i-name" value="Puan Aisyah Rahman">
+            </div>
+            <div class="field">
+              <label class="label" for="i-title">Headline</label>
+              <input class="input" id="i-title" value="Python and automation instructor">
+            </div>
+            <div class="field">
+              <label class="label" for="i-bio">Bio</label>
+              <textarea class="textarea" id="i-bio">Fifteen years building automation for Malaysian SMEs. I teach the shortcuts I wish someone had shown me.</textarea>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Expertise</h2>
+            <div class="row" style="flex-wrap:wrap;gap:8px;margin-bottom:16px" id="inst-tags"></div>
+            <div class="field">
+              <label class="label" for="i-tag">Add a tag</label>
+              <input class="input" id="i-tag" placeholder="e.g. Data analysis">
+            </div>
+            <div class="divider"></div>
+            <div class="field">
+              <label class="label" for="i-email">Contact email</label>
+              <input class="input" id="i-email" type="email" value="aisyah@techieslms.my">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= Notifications ================= -->
+      <div data-tab-panel="inst:Notifications" hidden>
+        <div class="settings-grid">
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Email</h2>
+            <div class="toggle-row">
+              <div><div class="strong">New submission to grade</div>
+                <div class="tiny muted">As soon as a student submits</div></div>
+              <button class="toggle" data-toggle="subs" role="switch" aria-checked="true"></button>
+            </div>
+            <div class="toggle-row">
+              <div><div class="strong">Community mentions</div>
+                <div class="tiny muted">When someone replies to your post</div></div>
+              <button class="toggle" data-toggle="mentions" role="switch" aria-checked="true"></button>
+            </div>
+            <div class="toggle-row">
+              <div><div class="strong">Weekly summary</div>
+                <div class="tiny muted">Enrolments and completions every Monday</div></div>
+              <button class="toggle" data-toggle="weekly" role="switch" aria-checked="true"></button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">In-app</h2>
+            <div class="toggle-row">
+              <div><div class="strong">Push notifications</div>
+                <div class="tiny muted">Browser alerts while you are signed in</div></div>
+              <button class="toggle" data-toggle="pushNotif" role="switch" aria-checked="false"></button>
+            </div>
+            <div class="toggle-row">
+              <div><div class="strong">Deadline reminders</div>
+                <div class="tiny muted">Two days before an assignment is due</div></div>
+              <button class="toggle" data-toggle="deadlines" role="switch" aria-checked="true"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= Payout ================= -->
+      <div data-tab-panel="inst:Payout" hidden>
+        <div class="settings-grid">
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:6px">Payout details</h2>
+            <p class="small muted" style="margin-bottom:16px">Placeholder only. Payouts are not wired in this prototype.</p>
+            <div class="field">
+              <label class="label" for="i-bank">Bank</label>
+              <select class="select" id="i-bank">
+                <option>Maybank</option><option>CIMB Bank</option><option>Public Bank</option><option>RHB Bank</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="label" for="i-acct">Account number</label>
+              <input class="input" id="i-acct" placeholder="Not set">
+            </div>
+            <div class="field">
+              <label class="label" for="i-holder">Account holder</label>
+              <input class="input" id="i-holder" value="Puan Aisyah Rahman">
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Earnings this month</h2>
+            <div class="kpi-value">RM 4,180</div>
+            <div class="kpi-delta">+RM 620 vs last month</div>
+            <div class="divider"></div>
+            <div class="stack-sm small">
+              <div class="row-between"><span class="muted">Python Competency Program</span><span class="strong">RM 2,990</span></div>
+              <div class="row-between"><span class="muted">Web Development Bootcamp</span><span class="strong">RM 1,190</span></div>
+              <div class="row-between"><span class="muted">Arduino IoT Projects</span><span class="muted">Draft</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div id="overlays"></div>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shell.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const who = SESSION_USER.instructor;
+
+  qs('#inst-avatar-row').innerHTML =
+    avatar(who.initials, '#10B981', 64) +
+    '<div><div class="strong">' + esc(who.name) + '</div>' +
+    '<div class="tiny muted">' + esc(who.title) + '</div>' +
+    '<button class="btn btn-secondary btn-sm" style="margin-top:8px">Change photo</button></div>';
+
+  qs('#inst-tags').innerHTML = ['Python', 'Automation', 'Data analysis', 'Excel', 'APIs']
+    .map(function (t) { return '<span class="chip chip-category">' + esc(t) + '</span>'; })
+    .join('');
+});
+</script>

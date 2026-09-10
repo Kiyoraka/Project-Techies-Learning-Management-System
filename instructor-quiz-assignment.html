@@ -1,0 +1,104 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz and Assignment — Techies LMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/controls.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/screens.css">
+
+<body data-role="instructor" data-route="inst.qa" data-title="Quiz and Assignment">
+
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="app-main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content">
+
+      <div class="page-head">
+        <div>
+          <h1 class="page-title">Quiz and Assignment</h1>
+          <p class="page-sub">Build graded quizzes and track assignment submissions.</p>
+        </div>
+      </div>
+
+      <div class="tabs" data-tabs="qa">
+        <button class="tab is-active" data-tab="Quiz">Quiz</button>
+        <button class="tab" data-tab="Assignment">Assignment</button>
+      </div>
+
+      <!-- ================= Quiz builder ================= -->
+      <div data-tab-panel="qa:Quiz">
+        <div class="card" style="margin-bottom:20px">
+          <div class="grid-3">
+            <div class="field" style="margin:0">
+              <label class="label" for="q-title">Quiz title</label>
+              <input class="input" id="q-title" value="Module 2 Quiz — Variables and Data Types">
+            </div>
+            <div class="field" style="margin:0">
+              <label class="label" for="q-limit">Time limit</label>
+              <select class="select" id="q-limit">
+                <option>10 minutes</option><option selected>20 minutes</option><option>No limit</option>
+              </select>
+            </div>
+            <div class="field" style="margin:0">
+              <label class="label" for="q-attempts">Attempts allowed</label>
+              <select class="select" id="q-attempts">
+                <option selected>1</option><option>2</option><option>Unlimited</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="page-head" style="margin-bottom:14px">
+          <div>
+            <h2 class="card-title">Questions</h2>
+            <p class="tiny muted" id="quiz-total"></p>
+          </div>
+          <div class="row">
+            <button class="btn btn-secondary btn-sm" data-add-q="Multiple choice">Multiple choice</button>
+            <button class="btn btn-secondary btn-sm" data-add-q="True or false">True or false</button>
+            <button class="btn btn-secondary btn-sm" data-add-q="Short answer">Short answer</button>
+          </div>
+        </div>
+
+        <div class="stack-sm" id="quiz-questions"></div>
+
+        <div class="row" style="margin-top:20px;justify-content:flex-end">
+          <button class="btn btn-primary" data-toast="save">Save quiz</button>
+        </div>
+      </div>
+
+      <!-- ================= Assignments ================= -->
+      <div data-tab-panel="qa:Assignment" hidden>
+        <div class="page-head" style="margin-bottom:14px">
+          <h2 class="card-title">Assignments</h2>
+          <button class="btn btn-primary btn-sm" data-toast="save">New assignment</button>
+        </div>
+        <div class="table-card">
+          <div class="table-scroll">
+            <table class="table">
+              <thead>
+                <tr><th>Assignment</th><th>Due</th><th>Submissions</th><th></th></tr>
+              </thead>
+              <tbody id="assignment-rows"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div id="overlays"></div>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shell.js"></script>
+<script src="assets/js/pages/quiz-assignment.js"></script>
