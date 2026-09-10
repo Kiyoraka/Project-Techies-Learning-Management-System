@@ -54,7 +54,6 @@
    ========================================================================== */
 
 .site {
-  min-width: var(--page-min);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -174,7 +173,6 @@
 
 .app {
   display: flex;
-  min-width: var(--page-min);
   min-height: 100vh;
 }
 
@@ -526,7 +524,6 @@
    ========================================================================== */
 
 .signin {
-  min-width: var(--page-min);
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 100vh;

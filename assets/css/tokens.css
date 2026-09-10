@@ -177,7 +177,22 @@
   --topbar-height:      64px;
   --content-max:        1280px;
   --content-pad:        24px;
-  --page-min:           1180px;  /* desktop screens are designed above this */
+  --content-pad-sm:     16px;    /* mobile gutter */
+
+  /* ------------------------------------------------------------------------
+     Breakpoints
+     These values are documentation only - CSS cannot use custom properties
+     inside a media query. The numbers here and in responsive.css must be
+     kept in step by hand.
+
+       desktop   >= 1180px   full sidebar, full grids, unchanged
+       tablet     768-1179   sidebar collapses to the icon rail, grids halve
+       mobile      < 768     sidebar hidden, bottom nav bar, single column
+     ---------------------------------------------------------------------- */
+
+  --bp-tablet:          768px;
+  --bp-desktop:         1180px;
+  --bottom-nav-height:  58px;
   --search-max:         480px;
   --gutter:             24px;
 
