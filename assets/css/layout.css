@@ -1,0 +1,716 @@
+/* ==========================================================================
+   layout.css — the two shells
+   --------------------------------------------------------------------------
+   Landing shell   sticky white top nav, flexible main, dark footer
+   Dashboard shell fixed dark sidebar, sticky white topbar, centred content
+   Sign-in         standalone 50/50 split, no nav and no footer
+   Overlays        toast host and the floating screen index
+
+   Every dimension is measured from the canvas. Requires tokens.css.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. Shared brand lockup
+   The logo slot is a dashed placeholder in the design, awaiting client art.
+   ========================================================================== */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  border: 1.5px dashed var(--mint-border);
+  background: var(--mint-fill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: var(--weight-semibold);
+  color: var(--primary-hover);
+  flex-shrink: 0;
+}
+
+.brand-name {
+  font-weight: var(--weight-bold);
+  font-size: var(--text-xl);
+  letter-spacing: -0.02em;
+}
+
+/* On the dark sidebar and footer the slot loses its mint fill. */
+.brand-on-dark .brand-logo {
+  border-color: var(--on-dark-40);
+  background: none;
+  color: var(--on-dark-60);
+}
+
+/* ==========================================================================
+   2. Landing shell
+   ========================================================================== */
+
+.site {
+  min-width: var(--page-min);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-nav {
+  height: var(--topbar-height);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.site-nav-inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--content-pad);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-links {
+  display: flex;
+  gap: 8px;
+}
+
+.site-link {
+  border: none;
+  border-radius: var(--radius-control);
+  padding: 8px 14px;
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  color: var(--text);
+  background: transparent;
+}
+
+.site-link:hover {
+  background: var(--mint-fill);
+}
+
+.site-link.is-active {
+  background: var(--mint-fill);
+  color: var(--primary-hover);
+}
+
+.site-main {
+  flex: 1;
+}
+
+/* --- Footer ------------------------------------------------------------- */
+
+.site-footer {
+  background: var(--sidebar);
+  color: var(--on-dark);
+  margin-top: auto;
+}
+
+.site-footer-inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 56px var(--content-pad) 32px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 32px;
+}
+
+.site-footer .brand {
+  margin-bottom: 14px;
+}
+
+.footer-blurb {
+  color: var(--on-dark-65);
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+.footer-col-title {
+  font-weight: var(--weight-semibold);
+  margin-bottom: 14px;
+}
+
+.footer-col-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--on-dark-70);
+}
+
+.footer-col-links a {
+  color: inherit;
+}
+
+.footer-col-links a:hover {
+  color: var(--on-dark);
+}
+
+.site-footer-base {
+  border-top: 1px solid var(--on-dark-12);
+}
+
+.site-footer-base-inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 18px var(--content-pad);
+  font-size: var(--text-sm);
+  color: var(--on-dark-50);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ==========================================================================
+   3. Dashboard shell
+   ========================================================================== */
+
+.app {
+  display: flex;
+  min-width: var(--page-min);
+  min-height: 100vh;
+}
+
+/* --- Sidebar ------------------------------------------------------------ */
+
+.sidebar {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  background: var(--sidebar);
+  color: var(--on-dark);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.2s;
+}
+
+.app.is-collapsed .sidebar {
+  width: var(--sidebar-collapsed);
+}
+
+.sidebar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 16px 12px 20px;
+  height: var(--topbar-height);
+}
+
+.sidebar-head .brand {
+  gap: 10px;
+  overflow: hidden;
+}
+
+.sidebar-head .brand-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-control);
+  font-size: 8px;
+}
+
+.sidebar-head .brand-name {
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+.sidebar-collapse {
+  color: var(--on-dark-70);
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  display: flex;
+}
+
+.sidebar-collapse:hover {
+  background: var(--on-dark-06);
+  color: var(--on-dark);
+}
+
+.sidebar-collapse svg {
+  transition: transform 0.2s;
+}
+
+.app.is-collapsed .sidebar-collapse svg {
+  transform: rotate(180deg);
+}
+
+/* Labels, chevrons and children all vanish when collapsed. */
+.app.is-collapsed .sidebar-head .brand-name,
+.app.is-collapsed .nav-label,
+.app.is-collapsed .nav-chevron,
+.app.is-collapsed .nav-children,
+.app.is-collapsed .logout-label {
+  display: none;
+}
+
+.app.is-collapsed .sidebar-head {
+  justify-content: center;
+  padding: 16px 8px 12px;
+}
+
+.app.is-collapsed .nav-item,
+.app.is-collapsed .logout {
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* --- Navigation --------------------------------------------------------- */
+
+.sidebar-nav {
+  flex: 1;
+  padding: 8px 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 13px;
+  margin: 2px 12px;
+  border-radius: var(--radius-control);
+  cursor: pointer;
+  color: var(--on-dark-85);
+  background: transparent;
+  border-left: 3px solid transparent;
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+  width: calc(100% - 24px);
+  text-align: left;
+}
+
+.nav-item:hover {
+  background: var(--on-dark-06);
+  color: var(--on-dark);
+}
+
+.nav-item.is-active {
+  color: var(--on-dark);
+  background: var(--sidebar-active);
+  border-left-color: var(--primary);
+}
+
+/* A parent with children highlights its label but takes no fill. */
+.nav-item.is-parent-active {
+  color: var(--on-dark);
+  background: transparent;
+  border-left-color: transparent;
+}
+
+.nav-item svg {
+  flex-shrink: 0;
+}
+
+.nav-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-chevron {
+  transition: transform 0.15s;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.nav-group.is-open .nav-chevron {
+  transform: rotate(180deg);
+}
+
+.nav-children {
+  padding-bottom: 4px;
+}
+
+.nav-group:not(.is-open) .nav-children {
+  display: none;
+}
+
+.nav-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px 8px 48px;
+  margin: 1px 12px;
+  border-radius: var(--radius-control);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  color: var(--on-dark-75);
+  background: transparent;
+  white-space: nowrap;
+  width: calc(100% - 24px);
+  text-align: left;
+}
+
+.nav-child:hover {
+  background: var(--on-dark-06);
+  color: var(--on-dark);
+}
+
+.nav-child.is-active {
+  color: var(--on-dark);
+  background: var(--sidebar-active);
+}
+
+.nav-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--on-dark-40);
+  flex-shrink: 0;
+}
+
+.nav-child.is-active .nav-dot {
+  background: var(--primary);
+}
+
+/* --- Logout ------------------------------------------------------------- */
+
+.sidebar-foot {
+  padding: 12px;
+  border-top: 1px solid var(--on-dark-10);
+}
+
+.logout {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 13px;
+  border-radius: var(--radius-control);
+  color: var(--on-dark-85);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+}
+
+.logout:hover {
+  background: var(--on-dark-06);
+  color: var(--on-dark);
+}
+
+/* --- Main column -------------------------------------------------------- */
+
+.app-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  height: var(--topbar-height);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: var(--gutter);
+  padding: 0 var(--content-pad);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.topbar-title {
+  font-size: 18px;
+  font-weight: var(--weight-semibold);
+  width: 240px;
+  flex-shrink: 0;
+  letter-spacing: -0.01em;
+}
+
+.topbar-search {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.topbar-search-field {
+  position: relative;
+  width: 100%;
+  max-width: var(--search-max);
+}
+
+.topbar-search-field svg {
+  position: absolute;
+  left: 12px;
+  top: 11px;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.topbar-bell {
+  position: relative;
+  color: var(--text-muted);
+  padding: 8px;
+  border-radius: var(--radius-control);
+  display: flex;
+}
+
+.topbar-bell:hover {
+  background: var(--background);
+  color: var(--text);
+}
+
+.topbar-bell::after {
+  content: '';
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-pill);
+  background: var(--primary);
+  border: 1.5px solid var(--surface);
+}
+
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 4px 6px 4px 4px;
+  border-radius: var(--radius-control);
+}
+
+.topbar-user:hover {
+  background: var(--background);
+}
+
+.topbar-user .avatar {
+  width: 34px;
+  height: 34px;
+  font-size: var(--text-2xs);
+}
+
+.topbar-user-meta {
+  line-height: 1.2;
+}
+
+.topbar-user-name {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+}
+
+.topbar-user-role {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.content {
+  flex: 1;
+  padding: var(--content-pad);
+  max-width: var(--content-max);
+  width: 100%;
+  margin: 0 auto;
+  animation: edulms-in 0.25s ease-out;
+}
+
+/* ==========================================================================
+   4. Sign-in — standalone split, no shell
+   ========================================================================== */
+
+.signin {
+  min-width: var(--page-min);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+.signin-panel {
+  background: var(--sidebar);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px;
+  color: var(--on-dark);
+}
+
+.signin-panel > * {
+  position: relative;
+}
+
+/* Three abstract emerald shapes, positioned exactly as the artboard. */
+.shape {
+  position: absolute;
+  border-radius: var(--radius-pill);
+}
+
+.shape-1 {
+  right: -120px;
+  top: -80px;
+  width: 420px;
+  height: 420px;
+  background: var(--primary);
+  opacity: 0.35;
+}
+
+.shape-2 {
+  left: -60px;
+  bottom: -140px;
+  width: 380px;
+  height: 380px;
+  background: var(--chart-2);
+  opacity: 0.25;
+}
+
+.shape-3 {
+  right: 120px;
+  bottom: 120px;
+  width: 160px;
+  height: 160px;
+  border-radius: 40px;
+  background: var(--chart-3);
+  opacity: 0.4;
+  transform: rotate(20deg);
+}
+
+.signin-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  background: var(--surface);
+}
+
+.signin-card {
+  width: 100%;
+  max-width: 380px;
+}
+
+/* ==========================================================================
+   5. Overlays
+   ========================================================================== */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: none;
+  align-items: center;
+  gap: 12px;
+  background: var(--text);
+  color: var(--on-dark);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  box-shadow: var(--shadow-modal);
+}
+
+.toast.is-visible {
+  display: flex;
+  animation: edulms-in 0.2s ease-out;
+}
+
+.toast-badge {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-pill);
+  background: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* --- Screen index ------------------------------------------------------- */
+
+.index-dock {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.index-panel {
+  width: 560px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: 0 16px 48px rgba(15, 31, 25, 0.18);
+  padding: 20px;
+  animation: edulms-in 0.2s ease-out;
+}
+
+.index-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.index-title {
+  font-weight: var(--weight-semibold);
+}
+
+.index-hint {
+  font-size: var(--text-2xs);
+  color: var(--text-muted);
+}
+
+.index-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.index-group-title {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  margin-bottom: 6px;
+}
+
+.index-links {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.index-link {
+  text-align: left;
+  background: transparent;
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 6px 8px;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  display: block;
+}
+
+.index-link:hover {
+  background: var(--background);
+}
+
+.index-link.is-active {
+  background: var(--mint-fill);
+  color: var(--primary-hover);
+}
