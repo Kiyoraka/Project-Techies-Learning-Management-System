@@ -1,0 +1,202 @@
+/* ==========================================================================
+   tokens.css — Techies LMS design tokens
+   --------------------------------------------------------------------------
+   Single source of truth for every colour, radius, shadow, type step and
+   layout dimension in the prototype. Values are lifted verbatim from the
+   Claude Design canvas; nothing here is invented.
+
+   Nothing in this file selects an element. It only declares custom
+   properties. Every other stylesheet consumes them.
+   ========================================================================== */
+
+:root {
+
+  /* ------------------------------------------------------------------------
+     1. Core palette — modern green
+     Reads as a contemporary SaaS product, not an institutional portal.
+     ---------------------------------------------------------------------- */
+
+  --sidebar:            #0B2E23;  /* near-black forest: sidebar, footer, signin panel */
+  --sidebar-active:     #134E3A;  /* active nav fill, avatar backgrounds, poster art  */
+  --primary:            #10B981;  /* fresh emerald: buttons, links, progress, toggles */
+  --primary-hover:      #059669;  /* hover / pressed, active tab text, category text  */
+  --mint-fill:          #ECFDF5;  /* soft fills: selected rows, pills, tinted cards   */
+  --mint-border:        #A7F3D0;  /* focus rings, tinted borders, disabled primary    */
+
+  /* ------------------------------------------------------------------------
+     2. Surfaces and text
+     ---------------------------------------------------------------------- */
+
+  --background:         #F6FAF8;  /* page canvas, muted rows, composer input fill */
+  --surface:            #FFFFFF;  /* cards, top bar, tables                       */
+  --border:             #E3EBE7;  /* card, table and input borders                */
+  --text:               #0F1F19;  /* primary text, toast background               */
+  --text-muted:         #5B6B64;  /* secondary text, timestamps, inactive icons   */
+
+  /* ------------------------------------------------------------------------
+     3. Control states
+     ---------------------------------------------------------------------- */
+
+  --control-off:        #CBD5D0;  /* toggle off track, unchecked radio/checkbox ring */
+
+  /* ------------------------------------------------------------------------
+     4. Feedback colours — each with a soft fill and a readable dark
+     Info is for badges only, never for interactive elements.
+     ---------------------------------------------------------------------- */
+
+  --danger:             #EF4444;
+  --danger-fill:        #FEF2F2;
+  --danger-strong:      #DC2626;
+
+  --warning:            #F59E0B;
+  --warning-fill:       #FEF3C7;
+  --warning-strong:     #B45309;
+
+  --info:               #3B82F6;
+  --info-fill:          #DBEAFE;
+  --info-strong:        #1D4ED8;
+
+  /* ------------------------------------------------------------------------
+     5. Status chips — course lifecycle
+     ---------------------------------------------------------------------- */
+
+  --status-published-bg: var(--mint-fill);
+  --status-published-fg: var(--primary-hover);
+  --status-draft-bg:     #F1F5F3;
+  --status-draft-fg:     var(--text-muted);
+  --status-pending-bg:   var(--warning-fill);
+  --status-pending-fg:   var(--warning-strong);
+
+  /* ------------------------------------------------------------------------
+     6. Role chips — Admin reads as solid, the other two as tints
+     ---------------------------------------------------------------------- */
+
+  --role-admin-bg:      var(--sidebar-active);
+  --role-admin-fg:      #FFFFFF;
+  --role-instructor-bg: var(--mint-fill);
+  --role-instructor-fg: var(--primary-hover);
+  --role-student-bg:    var(--background);
+  --role-student-fg:    var(--text-muted);
+
+  /* ------------------------------------------------------------------------
+     7. Chart series — green, light green, teal. No other hues.
+     ---------------------------------------------------------------------- */
+
+  --chart-1:            #10B981;
+  --chart-2:            #34D399;
+  --chart-3:            #0EA5A4;
+  --chart-area-from:    rgba(16, 185, 129, 0.35);
+  --chart-area-to:      rgba(16, 185, 129, 0);
+
+  /* ------------------------------------------------------------------------
+     8. On-dark text ladder
+     The sidebar, footer and sign-in panel sit on --sidebar, so their text and
+     dividers are white at graded opacity rather than separate hex values.
+     ---------------------------------------------------------------------- */
+
+  --on-dark:            #FFFFFF;
+  --on-dark-85:         rgba(255, 255, 255, 0.85);  /* nav label, inactive     */
+  --on-dark-75:         rgba(255, 255, 255, 0.75);  /* child nav label         */
+  --on-dark-72:         rgba(255, 255, 255, 0.72);
+  --on-dark-70:         rgba(255, 255, 255, 0.70);
+  --on-dark-65:         rgba(255, 255, 255, 0.65);  /* footer body copy        */
+  --on-dark-60:         rgba(255, 255, 255, 0.60);
+  --on-dark-50:         rgba(255, 255, 255, 0.50);  /* footer copyright line   */
+  --on-dark-40:         rgba(255, 255, 255, 0.40);  /* inactive child dot      */
+  --on-dark-25:         rgba(255, 255, 255, 0.25);
+  --on-dark-20:         rgba(255, 255, 255, 0.20);
+  --on-dark-12:         rgba(255, 255, 255, 0.12);  /* divider on dark         */
+  --on-dark-10:         rgba(255, 255, 255, 0.10);
+  --on-dark-06:         rgba(255, 255, 255, 0.06);  /* hover wash on dark      */
+  --on-dark-05:         rgba(255, 255, 255, 0.05);
+  --on-dark-045:        rgba(255, 255, 255, 0.045);
+
+  /* ------------------------------------------------------------------------
+     9. Radii — 12px cards, 8px controls, fully round pills
+     ---------------------------------------------------------------------- */
+
+  --radius-card:        12px;
+  --radius-control:     8px;
+  --radius-sm:          6px;
+  --radius-md:          10px;
+  --radius-lg:          16px;
+  --radius-pill:        999px;
+
+  /* ------------------------------------------------------------------------
+     10. Elevation
+     ---------------------------------------------------------------------- */
+
+  --shadow-card:        0 1px 2px rgba(15, 31, 25, 0.06);
+  --shadow-panel:       0 8px 24px rgba(15, 31, 25, 0.20);
+  --shadow-modal:       0 16px 48px rgba(15, 31, 25, 0.25);
+  --shadow-dropdown:    0 4px 16px rgba(0, 0, 0, 0.20);
+
+  /* Focus ring — applied as border-color + box-shadow together. */
+  --focus-ring:         0 0 0 3px var(--mint-border);
+
+  /* ------------------------------------------------------------------------
+     11. Typography
+     ---------------------------------------------------------------------- */
+
+  --font-sans:          'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --text-xs:            11px;   /* chips, eyebrow labels            */
+  --text-2xs:           12px;   /* timestamps, meta, footer links   */
+  --text-sm:            13px;   /* dense table cells, child nav     */
+  --text-base:          14px;   /* body default                     */
+  --text-md:            15px;   /* card headings                    */
+  --text-lg:            16px;
+  --text-xl:            20px;
+  --text-2xl:           24px;
+  --text-3xl:           28px;   /* KPI numbers, floor               */
+  --text-4xl:           32px;   /* KPI numbers, ceiling             */
+  --text-hero:          44px;   /* landing hero headline            */
+
+  --weight-regular:     400;
+  --weight-medium:      500;
+  --weight-semibold:    600;
+  --weight-bold:        700;
+
+  --leading-tight:      1.25;
+  --leading-snug:       1.45;
+  --leading-normal:     1.5;
+  --leading-relaxed:    1.65;
+
+  --tracking-wide:      0.08em;  /* eyebrow / poster labels */
+
+  /* ------------------------------------------------------------------------
+     12. Layout dimensions
+     ---------------------------------------------------------------------- */
+
+  --sidebar-width:      260px;
+  --sidebar-collapsed:  72px;
+  --topbar-height:      64px;
+  --content-max:        1280px;
+  --content-pad:        24px;
+  --page-min:           1180px;  /* desktop screens are designed above this */
+  --search-max:         480px;
+  --gutter:             24px;
+
+  /* Community feed columns */
+  --feed-left:          280px;
+  --feed-right:         300px;
+
+  /* ------------------------------------------------------------------------
+     13. Motion
+     ---------------------------------------------------------------------- */
+
+  --ease:               cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast:      120ms;
+  --duration-base:      180ms;
+  --toast-life:         2600ms;  /* mirrored in ui.js — keep the two in step */
+
+  /* ------------------------------------------------------------------------
+     14. Google brand — sign-in button glyph only
+     Not part of the theme; never reuse these outside the Google G icon.
+     ---------------------------------------------------------------------- */
+
+  --google-blue:        #4285F4;
+  --google-red:         #EA4335;
+  --google-yellow:      #FBBC05;
+  --google-green:       #34A853;
+}
