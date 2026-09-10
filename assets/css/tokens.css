@@ -75,8 +75,12 @@
   --role-admin-fg:      #FFFFFF;
   --role-instructor-bg: var(--mint-fill);
   --role-instructor-fg: var(--primary-hover);
-  --role-student-bg:    var(--background);
+  /* The main artboards use F1F5F3 for the student chip; the community feed
+     component uses F6FAF8 for the same chip. Both are kept so each surface
+     matches its own source file. */
+  --role-student-bg:    #F1F5F3;
   --role-student-fg:    var(--text-muted);
+  --role-student-bg-feed: var(--background);
 
   /* ------------------------------------------------------------------------
      7. Chart series — green, light green, teal. No other hues.
