@@ -744,3 +744,22 @@
   flex-shrink: 0;
   display: inline-block;
 }
+
+
+/* ==========================================================================
+   Instructor dashboard
+   ========================================================================== */
+
+.deadline-date {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  padding: 6px 8px;
+  border-radius: var(--radius-control);
+  border: 1.5px solid var(--border);
+  background: var(--background);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  flex-shrink: 0;
+}

@@ -1,0 +1,65 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All Courses — Techies LMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/controls.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/screens.css">
+
+<body data-role="instructor" data-route="inst.courses" data-title="All Courses">
+
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="app-main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content">
+
+      <div class="page-head">
+        <div>
+          <h1 class="page-title">All Courses</h1>
+          <p class="page-sub">Everything you have built, published or still drafting.</p>
+        </div>
+        <a class="btn btn-primary" href="instructor-create-course.html">Create Course</a>
+      </div>
+
+      <div class="course-grid" id="inst-courses"></div>
+
+    </main>
+  </div>
+</div>
+
+<div id="overlays"></div>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shell.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const mine = COURSES.filter(function (c) {
+    return c.instructor === SESSION_USER.instructor.name;
+  });
+
+  qs('#inst-courses').innerHTML = mine.map(function (c) {
+    return '<article class="course-card">' +
+      '<div class="course-thumb" style="background:' + c.thumb + '"></div>' +
+      '<div class="course-body">' +
+        '<div class="row-between">' + statusChip(c.status) +
+          '<span class="tiny muted">' + formatCount(c.enrolled) + ' enrolled</span></div>' +
+        '<div class="course-title">' + esc(c.title) + '</div>' +
+        '<div class="course-meta">' + c.lessons + ' lessons &middot; ' + c.hours + 'h &middot; ' + esc(c.level) + '</div>' +
+        '<div class="course-meta">Last edited ' + esc(c.updated) + '</div>' +
+        '<div class="course-foot">' +
+          '<a class="btn btn-secondary btn-sm" href="instructor-create-course.html">Edit</a>' +
+          '<a class="btn btn-ghost btn-sm" href="course-detail.html">View</a>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }).join('');
+});
+</script>

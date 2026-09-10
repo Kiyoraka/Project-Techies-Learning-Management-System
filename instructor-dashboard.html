@@ -1,0 +1,118 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard — Techies LMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/controls.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/screens.css">
+
+<body data-role="instructor" data-route="inst.dashboard" data-title="Dashboard">
+
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="app-main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content">
+
+      <div class="kpi-grid" id="kpis"></div>
+
+      <section style="margin-top:24px">
+        <div class="page-head">
+          <h2 class="card-title">My courses</h2>
+          <a class="btn btn-secondary btn-sm" href="instructor-courses.html">View all</a>
+        </div>
+        <div class="grid-3" id="my-courses"></div>
+      </section>
+
+      <div class="dash-split" style="margin-top:24px">
+        <section class="card">
+          <div class="card-head">
+            <h2 class="card-title">Recent submissions to grade</h2>
+            <a class="card-link" href="instructor-quiz-assignment.html#assignment">All assignments</a>
+          </div>
+          <div class="card-list" id="submissions"></div>
+        </section>
+
+        <section class="card">
+          <div class="card-head">
+            <h2 class="card-title">Upcoming deadlines</h2>
+          </div>
+          <div class="card-list" id="deadlines"></div>
+        </section>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div id="overlays"></div>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shell.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  qs('#kpis').innerHTML = KPIS.instructor.map(function (k) {
+    return '<div class="card">' +
+      '<div class="kpi-label">' + esc(k[0]) + '</div>' +
+      '<div class="kpi-value">' + esc(k[1]) + '</div>' +
+      '<div class="kpi-delta kpi-delta-muted">' + esc(k[2]) + '</div>' +
+      '</div>';
+  }).join('');
+
+  /* Courses owned by the signed-in instructor, each with its average
+     student completion drawn as a ring. */
+  const mine = COURSES.filter(function (c) {
+    return c.instructor === SESSION_USER.instructor.name;
+  });
+
+  qs('#my-courses').innerHTML = mine.map(function (c) {
+    const avg = COURSE_AVG_COMPLETION[c.id] || 0;
+    return '<article class="card">' +
+      '<div class="row-between" style="align-items:flex-start">' +
+        '<div><div class="course-title">' + esc(c.title) + '</div>' +
+          '<div class="tiny muted" style="margin-top:4px">' + formatCount(c.enrolled) + ' students &middot; ' + c.lessons + ' lessons</div></div>' +
+        statusChip(c.status) +
+      '</div>' +
+      '<div class="row" style="gap:16px;margin-top:16px">' +
+        '<div class="ring-wrap">' + progressRing(avg) + '<span class="ring-value">' + avg + '%</span></div>' +
+        '<div><div class="small strong">Average completion</div>' +
+          '<div class="tiny muted">Last edited ' + esc(c.updated) + '</div></div>' +
+      '</div>' +
+      '<div class="row" style="gap:8px;margin-top:16px">' +
+        '<a class="btn btn-secondary btn-sm" href="instructor-create-course.html">Edit</a>' +
+        '<a class="btn btn-ghost btn-sm" href="course-detail.html">View</a>' +
+      '</div>' +
+    '</article>';
+  }).join('');
+
+  qs('#submissions').innerHTML = SUBMISSIONS.map(function (s) {
+    return '<div class="row" style="align-items:flex-start;gap:10px">' +
+      avatar(s.initials, s.color, 32) +
+      '<div style="flex:1;min-width:0">' +
+        '<div class="small strong">' + esc(s.item) + '</div>' +
+        '<div class="tiny muted">' + esc(s.student) + ' &middot; ' + esc(s.course) + ' &middot; ' + esc(s.time) + '</div>' +
+      '</div>' +
+      '<button class="btn btn-secondary btn-sm" data-toast="grade">Grade</button>' +
+      '</div>';
+  }).join('');
+
+  qs('#deadlines').innerHTML = DEADLINES.map(function (d) {
+    return '<div class="row" style="align-items:flex-start;gap:10px">' +
+      '<span class="deadline-date" style="border-color:' + d.tone + '">' + esc(d.due) + '</span>' +
+      '<div style="flex:1;min-width:0">' +
+        '<div class="small strong">' + esc(d.title) + '</div>' +
+        '<div class="tiny muted">' + esc(d.course) + '</div>' +
+      '</div>' +
+      '<span class="tiny" style="color:' + d.tone + ';font-weight:600">' + esc(d.label) + '</span>' +
+      '</div>';
+  }).join('');
+});
+</script>
