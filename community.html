@@ -1,0 +1,45 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Community — Techies LMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/controls.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/feed.css">
+<link rel="stylesheet" href="assets/css/screens.css">
+
+<body data-role="public" data-route="community" data-title="Community">
+
+<div class="site">
+  <header class="site-nav" id="topnav"></header>
+
+  <main class="site-main">
+    <div class="rail" style="padding-top:40px;padding-bottom:64px">
+
+      <div class="page-head">
+        <div>
+          <h1 class="band-title">Community</h1>
+          <p class="band-sub">Announcements, competitions and workshops from every class.</p>
+        </div>
+      </div>
+
+      <!-- read-only: the public view has no composer and shows the sign-in banner -->
+      <div id="community-feed" data-readonly></div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+</div>
+
+<div id="overlays"></div>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shell.js"></script>
+<script src="assets/js/community-feed.js"></script>

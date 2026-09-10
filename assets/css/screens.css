@@ -606,3 +606,62 @@
 }
 
 .learn-item svg { margin-top: 2px; flex-shrink: 0; }
+
+
+/* ==========================================================================
+   Sign in (signin.html)
+   ========================================================================== */
+
+.signin-headline {
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  max-width: 420px;
+}
+
+.signin-blurb {
+  color: var(--on-dark-65);
+  margin-top: 14px;
+  max-width: 400px;
+  line-height: var(--leading-relaxed);
+}
+
+.signin-proof {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--on-dark-70);
+}
+
+.signin-proof .avatar-stack .avatar {
+  border-color: var(--sidebar);
+}
+
+.signin-proof .avatar-more {
+  background: var(--sidebar-active);
+  color: var(--on-dark-70);
+}
+
+.signin-title {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.02em;
+}
+
+.signin-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 22px 0;
+  color: var(--text-muted);
+  font-size: var(--text-2xs);
+}
+
+.signin-divider::before,
+.signin-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}

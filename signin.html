@@ -1,0 +1,96 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign In — Techies LMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/controls.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/screens.css">
+
+<body data-role="public" data-route="signin" data-title="Sign In">
+
+<div class="signin">
+
+  <!-- ================= Illustration panel ================= -->
+  <div class="signin-panel">
+    <span class="shape shape-1"></span>
+    <span class="shape shape-2"></span>
+    <span class="shape shape-3"></span>
+
+    <a class="brand brand-on-dark" href="index.html">
+      <span class="brand-logo" data-brand="logo"></span>
+      <span class="brand-name" data-brand="short"></span>
+    </a>
+
+    <div>
+      <h1 class="signin-headline">Learn, teach and grow in one connected platform.</h1>
+      <p class="signin-blurb">Video courses, quizzes and certificates &mdash; with a community feed that keeps every class in sync.</p>
+    </div>
+
+    <div class="signin-proof" id="signin-proof"></div>
+  </div>
+
+  <!-- ================= Auth card ================= -->
+  <div class="signin-form">
+    <div class="signin-card">
+      <h2 class="signin-title">Welcome back</h2>
+      <p class="muted small" style="margin-top:6px">Sign in to continue your learning.</p>
+
+      <button class="btn btn-google" style="margin-top:24px" id="google-btn">Continue with Google</button>
+
+      <div class="signin-divider"><span>or sign in with email</span></div>
+
+      <div class="field">
+        <label class="label" for="signin-email">Email</label>
+        <input class="input" id="signin-email" type="email" placeholder="amirul.hakim@gmail.com">
+      </div>
+
+      <div class="field">
+        <div class="row-between" style="margin-bottom:6px">
+          <label class="label" for="signin-password" style="margin:0">Password</label>
+          <a class="tiny strong" href="#">Forgot password?</a>
+        </div>
+        <input class="input" id="signin-password" type="password" placeholder="••••••••">
+      </div>
+
+      <label class="check" style="margin:4px 0 20px">
+        <input type="checkbox" checked><span class="check-box"></span>
+        <span class="small">Keep me signed in</span>
+      </label>
+
+      <a class="btn btn-primary btn-block" href="student-dashboard.html">Sign in</a>
+
+      <p class="small muted" style="text-align:center;margin-top:18px">
+        New here? <a class="strong" href="#">Create a student account</a>
+      </p>
+
+      <p class="tiny muted" style="text-align:center;margin-top:24px">
+        Instructors are invited by an administrator.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<div id="overlays"></div>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shell.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  qs('#google-btn').innerHTML = iconGoogle(18) + 'Continue with Google';
+
+  qs('#signin-proof').innerHTML =
+    '<div class="avatar-stack">' +
+      avatar('AH', '#34D399', 32) + avatar('SN', '#0EA5A4', 32) + avatar('LW', '#134E3A', 32) +
+      '<span class="avatar avatar-more">+</span>' +
+    '</div>' +
+    '<span class="small">Joined by ' + formatCount(4812) + ' learners across Malaysia</span>';
+});
+</script>
