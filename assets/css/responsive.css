@@ -200,6 +200,10 @@
   /* Two-column screens stack */
   .detail-grid,
   .player            { grid-template-columns: minmax(0, 1fr); }
+
+  /* Continue Learning hero: the 260px art column is decorative. */
+  .resume-card       { grid-template-columns: minmax(0, 1fr); }
+  .resume-art        { display: none; }
   .detail-aside      { position: static; }
 
   .catalog           { grid-template-columns: 220px minmax(0, 1fr); }
@@ -307,6 +311,14 @@
   .stepper           { flex-direction: row; overflow-x: auto; padding-bottom: 4px; }
   .step              { width: auto; flex: 0 0 auto; }
 
+  /* --- Continue Learning hero ------------------------------------------- */
+
+  .resume-card       { grid-template-columns: minmax(0, 1fr); }
+  .resume-art        { display: none; }
+  .resume-body       { padding: 20px var(--content-pad-sm); }
+  .resume-title      { font-size: var(--text-lg); }
+  .resume-progress   { max-width: none; }
+
   /* --- Player and detail ------------------------------------------------ */
 
   .player,
@@ -341,6 +353,16 @@
   .quiz-card         { padding: 20px; }
   .quiz-text         { font-size: var(--text-lg); }
 
+  /* --- Overflow guard ---------------------------------------------------
+     Any single fixed-width child can push the whole document wider than the
+     viewport, which silently shoves the last bottom-nav slot off screen.
+     These three rules stop that happening from a missed declaration.
+     --------------------------------------------------------------------- */
+
+  html, body         { max-width: 100%; overflow-x: hidden; }
+  .toolbar-grow      { min-width: 0; }
+  .card-head         { gap: 10px; }
+
   /* --- Page furniture --------------------------------------------------- */
 
   .page-head         { flex-direction: column; align-items: stretch; gap: 12px; }
@@ -358,9 +380,12 @@
   .panel,
   .drawer            { width: 100%; max-width: 100%; }
 
-  /* Screen index sits above the bottom bar. */
+  /* Screen index sits above the bottom bar and shrinks to an icon so it
+     stops covering card content on a narrow screen. */
   .index-dock        { right: 12px; bottom: calc(var(--bottom-nav-height) + 12px); }
-  .index-panel       { width: calc(100vw - 24px); }
+  .index-btn         { padding: 10px; border-radius: var(--radius-pill); }
+  .index-btn span    { display: none; }
+  .index-panel       { width: calc(100vw - 24px); max-height: 60vh; }
   .index-grid        { grid-template-columns: minmax(0, 1fr); }
 
   /* Toast clears the bottom bar. */
@@ -372,12 +397,18 @@
 }
 
 /* ==========================================================================
-   4. Narrow phones — under 400px
+   4. Very narrow phones — under 360px
+   --------------------------------------------------------------------------
+   Deliberately below the common 390-430 phone band so the KPI and stats
+   grids stay 2x2 there, as the design diagram specifies. Only genuinely
+   small screens (iPhone SE and narrower) collapse to a single column.
    ========================================================================== */
 
-@media (max-width: 399px) {
+@media (max-width: 359px) {
   .kpi-grid,
   .stat-strip        { grid-template-columns: minmax(0, 1fr); }
   .bottom-tab        { font-size: 9px; }
+  .bottom-tab span   { letter-spacing: -0.01em; }
   .hero-title        { font-size: var(--text-2xl); }
+  .card              { padding: 14px; }
 }

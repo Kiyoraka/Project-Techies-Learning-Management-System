@@ -71,6 +71,66 @@ const SITE_LINKS = [
   { label: 'Community', route: 'community' }
 ];
 
+/* --------------------------------------------------------------------------
+   Bottom navigation — mobile only, revealed by responsive.css under 768px.
+
+   A bottom bar holds four slots. Student and the landing site have exactly
+   four destinations so they fit; admin and instructor have six, so their
+   fourth slot becomes More and opens a sheet with the remainder.
+
+   `covers` lists every route the slot should light up for, so the Student
+   "My Courses" tab stays lit across Enrolled, Browse Catalog, Certificates,
+   the lesson player, the quiz and the results screen.
+   -------------------------------------------------------------------------- */
+
+const BOTTOM_NAV = {
+  public: {
+    tabs: [
+      { label: 'Home',      icon: 'dash', route: 'home' },
+      { label: 'Courses',   icon: 'book', route: 'courses', covers: ['detail'] },
+      { label: 'Community', icon: 'chat', route: 'community' },
+      { label: 'Sign In',   icon: 'logout', route: 'signin' }
+    ],
+    more: []
+  },
+  student: {
+    tabs: [
+      { label: 'Home',       icon: 'dash', route: 'stu.dashboard' },
+      { label: 'My Courses', icon: 'book', route: 'stu.enrolled',
+        covers: ['stu.catalog', 'stu.certs', 'stu.player', 'stu.quiz', 'stu.result'] },
+      { label: 'Community',  icon: 'chat', route: 'stu.community' },
+      { label: 'Settings',   icon: 'gear', route: 'stu.settings' }
+    ],
+    more: []
+  },
+  admin: {
+    tabs: [
+      { label: 'Dashboard', icon: 'dash',  route: 'admin.dashboard' },
+      { label: 'Community', icon: 'chat',  route: 'admin.community' },
+      { label: 'Users',     icon: 'users', route: 'admin.users' }
+    ],
+    more: [
+      { label: 'Activity Log',     icon: 'act',  route: 'admin.activity' },
+      { label: 'Course Oversight', icon: 'eye',  route: 'admin.oversight' },
+      { label: 'Settings',         icon: 'gear', route: 'admin.settings' }
+    ]
+  },
+  instructor: {
+    tabs: [
+      { label: 'Dashboard', icon: 'dash', route: 'inst.dashboard' },
+      { label: 'Community', icon: 'chat', route: 'inst.community' },
+      { label: 'Courses',   icon: 'book', route: 'inst.courses' }
+    ],
+    more: [
+      { label: 'Create Course',      icon: 'plus', route: 'inst.create' },
+      { label: 'Quiz',               icon: 'quiz', route: 'inst.qa', hash: 'quiz' },
+      { label: 'Assignment',         icon: 'file', route: 'inst.qa', hash: 'assignment' },
+      { label: 'Student Management', icon: 'grad', route: 'inst.students' },
+      { label: 'Settings',           icon: 'gear', route: 'inst.settings' }
+    ]
+  }
+};
+
 const FOOTER_COLUMNS = [
   { title: 'Learn',     links: [{ label: 'All courses', route: 'courses' }, { label: 'Programming' }, { label: 'Robotics' }, { label: 'Business' }] },
   { title: 'Community', links: [{ label: 'Feed', route: 'community' }, { label: 'Events' }, { label: 'Competitions' }] },
@@ -279,6 +339,60 @@ function renderScreenIndex(route) {
 }
 
 /* --------------------------------------------------------------------------
+   Bottom navigation rendering
+   -------------------------------------------------------------------------- */
+
+/** Does a slot own the current route? */
+function tabOwns(tab, route) {
+  return tab.route === route || (tab.covers || []).indexOf(route) !== -1;
+}
+
+function renderBottomNav(role, route) {
+  const config = BOTTOM_NAV[role];
+  if (!config) {
+    return '';
+  }
+
+  const hasMore = config.more.length > 0;
+  const moreActive = hasMore && config.more.some(function (item) {
+    return tabOwns(item, route);
+  });
+
+  let slots = config.tabs.map(function (tab) {
+    const active = tabOwns(tab, route);
+    return '<a class="bottom-tab' + (active ? ' is-active' : '') + '"' +
+      ' href="' + hrefFor(tab.route, tab.hash) + '">' +
+      icon(tab.icon, 20) + '<span>' + esc(tab.label) + '</span></a>';
+  }).join('');
+
+  if (hasMore) {
+    slots += '<button class="bottom-tab' + (moreActive ? ' is-active' : '') + '"' +
+      ' data-more-toggle>' + iconDots(20) + '<span>More</span></button>';
+  }
+
+  const sheet = hasMore
+    ? '<div class="more-scrim" data-more-toggle></div>' +
+      '<div class="more-sheet" id="more-sheet">' +
+        '<div class="more-grip"></div>' +
+        config.more.map(function (item) {
+          const active = tabOwns(item, route) &&
+            (!item.hash || currentHash() === item.hash ||
+             (item.hash === 'quiz' && !currentHash()));
+          return '<a class="more-link' + (active ? ' is-active' : '') + '"' +
+            ' href="' + hrefFor(item.route, item.hash) + '">' +
+            icon(item.icon, 20, { stroke: 'var(--text-muted)' }) +
+            '<span>' + esc(item.label) + '</span></a>';
+        }).join('') +
+      '</div>'
+    : '';
+
+  return sheet +
+    '<nav class="bottom-nav" aria-label="Primary">' +
+      '<div class="bottom-nav-inner">' + slots + '</div>' +
+    '</nav>';
+}
+
+/* --------------------------------------------------------------------------
    Sidebar collapse — persisted so it survives the page hop that the
    one-file-per-screen shape introduces.
    -------------------------------------------------------------------------- */
@@ -337,19 +451,55 @@ function initShell() {
   }
 
   if (overlays) {
-    overlays.innerHTML = renderScreenIndex(route);
+    /* The mobile showcase page is a desktop artefact and takes no bottom bar. */
+    const wantsBottomNav = route !== 'mobile';
+    overlays.innerHTML = renderScreenIndex(route) +
+      (wantsBottomNav ? renderBottomNav(role, route) : '');
   }
 
-  /* Collapse toggle. */
+  /* Collapse toggle. Below 1180px the rail is the default, so the same
+     control expands instead — is-expanded opts out of the width rule. */
   on(document, 'click', '[data-collapse]', function (event) {
     event.preventDefault();
     const app = qs('.app');
     if (!app) {
       return;
     }
+    if (window.matchMedia('(max-width: 1179px)').matches) {
+      app.classList.toggle('is-expanded');
+      return;
+    }
     const next = !app.classList.contains('is-collapsed');
     app.classList.toggle('is-collapsed', next);
     writeCollapsed(next);
+  });
+
+  /* More sheet. */
+  on(document, 'click', '[data-more-toggle]', function (event) {
+    event.preventDefault();
+    const sheet = qs('#more-sheet');
+    const scrim = qs('.more-scrim');
+    if (!sheet) {
+      return;
+    }
+    const opening = !sheet.classList.contains('is-open');
+    sheet.classList.toggle('is-open', opening);
+    if (scrim) {
+      scrim.classList.toggle('is-open', opening);
+    }
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      const sheet = qs('#more-sheet');
+      const scrim = qs('.more-scrim');
+      if (sheet) {
+        sheet.classList.remove('is-open');
+      }
+      if (scrim) {
+        scrim.classList.remove('is-open');
+      }
+    }
   });
 
   /* Sidebar accordion — a parent with children expands in place. */
