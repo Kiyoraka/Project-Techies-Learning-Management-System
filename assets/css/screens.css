@@ -1,0 +1,58 @@
+/* ==========================================================================
+   screens.css — per-screen one-offs
+   --------------------------------------------------------------------------
+   Anything that belongs to exactly one artboard and has no reuse elsewhere.
+   If a rule here starts appearing on a second screen, promote it into
+   components.css instead.
+
+   Loaded last, so it can refine the shared vocabulary without !important.
+   Requires tokens.css, controls.css, components.css, layout.css.
+   ========================================================================== */
+
+/* ==========================================================================
+   Component Library (components.html)
+   Standalone page: no sidebar, no landing nav, just a centred column.
+   ========================================================================== */
+
+.library {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 40px var(--content-pad) 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.library-back {
+  align-self: flex-start;
+  padding: 0;
+  font-size: var(--text-sm);
+  background: none;
+}
+
+.library-back:hover {
+  background: none;
+}
+
+.library-title {
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+/* Sidebar states need their real dark ground to read correctly. */
+.library-sidebar-demo {
+  background: var(--sidebar);
+  border-radius: var(--radius-card);
+  padding: 12px 0;
+  width: 280px;
+}
+
+.library code {
+  font-size: var(--text-sm);
+  background: var(--mint-fill);
+  color: var(--primary-hover);
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+}

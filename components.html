@@ -1,0 +1,382 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Component Library — Techies LMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/controls.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/screens.css">
+
+<body data-role="public" data-route="components" data-title="Component Library">
+
+<div class="library">
+
+  <a class="btn-ghost library-back" href="index.html">&larr; Back to Home</a>
+
+  <header>
+    <h1 class="library-title">Component library</h1>
+    <p class="muted">Every shared class in <code>controls.css</code> and <code>components.css</code>, shown in the states the design specifies. This page is the visual contract: if a class changes, it shows here first.</p>
+  </header>
+
+  <!-- ================= Buttons ================= -->
+  <section>
+    <h2 class="section-label">Buttons</h2>
+    <div class="row" style="flex-wrap:wrap">
+      <button class="btn btn-primary">Primary</button>
+      <button class="btn btn-secondary">Secondary</button>
+      <button class="btn btn-ghost">Ghost</button>
+      <button class="btn btn-danger">Danger</button>
+      <button class="btn btn-primary" disabled>Disabled</button>
+      <button class="btn btn-dark">Dark</button>
+      <button class="btn btn-primary btn-sm">Small</button>
+      <button class="icon-btn" title="Edit"></button>
+    </div>
+  </section>
+
+  <!-- ================= Form controls ================= -->
+  <section>
+    <h2 class="section-label">Form controls</h2>
+    <div class="grid-3">
+      <div class="card">
+        <label class="label" for="demo-text">Text input</label>
+        <input class="input" id="demo-text" placeholder="Course title">
+        <p class="hint">Focus it to see the mint ring.</p>
+
+        <div class="divider"></div>
+
+        <label class="label" for="demo-select">Select</label>
+        <select class="select" id="demo-select">
+          <option>Newest</option>
+          <option>Popular</option>
+        </select>
+      </div>
+
+      <div class="card">
+        <span class="label">Checkbox</span>
+        <label class="check"><input type="checkbox" checked><span class="check-box"></span>Programming</label>
+        <label class="check" style="margin-top:10px"><input type="checkbox"><span class="check-box"></span>Robotics</label>
+
+        <div class="divider"></div>
+
+        <span class="label">Radio</span>
+        <label class="radio"><input type="radio" name="demo-level" checked><span class="radio-ring"></span>All levels</label>
+        <label class="radio" style="margin-top:10px"><input type="radio" name="demo-level"><span class="radio-ring"></span>Beginner</label>
+      </div>
+
+      <div class="card">
+        <span class="label">Toggle</span>
+        <div class="toggle-row">
+          <div>
+            <div class="strong">Google sign-in</div>
+            <div class="tiny muted">Allow students to use Google</div>
+          </div>
+          <button class="toggle" data-toggle="demo-a" role="switch" aria-checked="true"></button>
+        </div>
+        <div class="toggle-row">
+          <div>
+            <div class="strong">Maintenance mode</div>
+            <div class="tiny muted">Take the site offline</div>
+          </div>
+          <button class="toggle" data-toggle="demo-b" role="switch" aria-checked="false"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Chips ================= -->
+  <section>
+    <h2 class="section-label">Chips</h2>
+    <div class="stack-sm">
+      <div class="row" style="flex-wrap:wrap">
+        <span class="chip chip-admin">Admin</span>
+        <span class="chip chip-instructor">Instructor</span>
+        <span class="chip chip-student">Student</span>
+        <span class="chip chip-student chip-feed">Student (feed)</span>
+      </div>
+      <div class="row" style="flex-wrap:wrap">
+        <span class="chip chip-published">Published</span>
+        <span class="chip chip-draft">Draft</span>
+        <span class="chip chip-pending-review">Pending review</span>
+      </div>
+      <div class="row" style="flex-wrap:wrap">
+        <span class="chip chip-category">Announcements</span>
+        <span class="chip chip-category">Competitions</span>
+        <span class="chip chip-warning">Due soon</span>
+        <span class="chip chip-info">Info</span>
+        <span class="chip chip-danger">Overdue</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Pills and tabs ================= -->
+  <section>
+    <h2 class="section-label">Pills and tabs</h2>
+    <div class="stack">
+      <div class="pills" data-pills="demo">
+        <button class="pill is-active" data-pill="All">All</button>
+        <button class="pill" data-pill="General">General</button>
+        <button class="pill" data-pill="Announcements">Announcements</button>
+        <button class="pill" data-pill="Competitions">Competitions</button>
+        <button class="pill" data-pill="Events">Events and Workshops</button>
+      </div>
+
+      <div>
+        <div class="tabs" data-tabs="demo-tabs">
+          <button class="tab is-active" data-tab="All">All <span class="tab-count">8</span></button>
+          <button class="tab" data-tab="Admins">Admins <span class="tab-count">1</span></button>
+          <button class="tab" data-tab="Instructors">Instructors <span class="tab-count">3</span></button>
+          <button class="tab" data-tab="Students">Students <span class="tab-count">4</span></button>
+        </div>
+        <div data-tab-panel="demo-tabs:All" class="muted small">Every user in the system.</div>
+        <div data-tab-panel="demo-tabs:Admins" class="muted small" hidden>Administrators only.</div>
+        <div data-tab-panel="demo-tabs:Instructors" class="muted small" hidden>Instructors only.</div>
+        <div data-tab-panel="demo-tabs:Students" class="muted small" hidden>Students only.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Cards ================= -->
+  <section>
+    <h2 class="section-label">Cards</h2>
+    <div class="grid-3" id="demo-cards"></div>
+  </section>
+
+  <!-- ================= Progress ================= -->
+  <section>
+    <h2 class="section-label">Progress</h2>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title">Bar</div>
+        <div class="stack-sm" style="margin-top:12px" id="demo-bars"></div>
+      </div>
+      <div class="card row" style="gap:20px">
+        <div class="ring-wrap" id="demo-ring-card"></div>
+        <div>
+          <div class="card-title">Card ring</div>
+          <div class="tiny muted">r24, circumference 150.8</div>
+        </div>
+      </div>
+      <div class="card row" style="gap:20px">
+        <div class="ring-wrap" id="demo-ring-result"></div>
+        <div>
+          <div class="card-title">Result ring</div>
+          <div class="tiny muted">r52, circumference 326.7</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Table ================= -->
+  <section>
+    <h2 class="section-label">Table rows</h2>
+    <div class="table-card">
+      <table class="table">
+        <thead>
+          <tr><th>User</th><th>Role</th><th>Status</th><th>Joined</th><th></th></tr>
+        </thead>
+        <tbody id="demo-rows"></tbody>
+      </table>
+      <div class="table-foot">
+        <span>Showing 1 to 3 of 8</span>
+        <div class="row">
+          <button class="btn btn-secondary btn-sm">Previous</button>
+          <button class="btn btn-secondary btn-sm">Next</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Stepper and accordion ================= -->
+  <section>
+    <h2 class="section-label">Stepper and accordion</h2>
+    <div class="grid-2">
+      <div class="stepper">
+        <button class="step is-done"><span class="step-n">1</span>Basics</button>
+        <button class="step is-active"><span class="step-n">2</span>Curriculum</button>
+        <button class="step"><span class="step-n">3</span>Pricing</button>
+        <button class="step"><span class="step-n">4</span>Publish</button>
+      </div>
+      <div id="demo-accordion"></div>
+    </div>
+  </section>
+
+  <!-- ================= Sidebar item states ================= -->
+  <section>
+    <h2 class="section-label">Sidebar item states</h2>
+    <div class="library-sidebar-demo" id="demo-nav"></div>
+  </section>
+
+  <!-- ================= Toast and empty state ================= -->
+  <section>
+    <h2 class="section-label">Toast and empty state</h2>
+    <div class="grid-2">
+      <div class="card stack-sm">
+        <div class="card-title">Toast</div>
+        <p class="small muted">Bottom-centre pill, emerald check badge, clears after 2.6 seconds.</p>
+        <div class="row" style="flex-wrap:wrap">
+          <button class="btn btn-primary btn-sm" data-toast="save">Changes saved</button>
+          <button class="btn btn-secondary btn-sm" data-toast="enroll">Enrolled</button>
+          <button class="btn btn-secondary btn-sm" data-toast="share">Share link</button>
+        </div>
+      </div>
+      <div id="demo-empty"></div>
+    </div>
+  </section>
+
+  <!-- ================= Panel ================= -->
+  <section>
+    <h2 class="section-label">Side panel</h2>
+    <button class="btn btn-primary" data-panel-open="demo-panel">Open panel</button>
+  </section>
+
+</div>
+
+<aside class="panel" id="demo-panel">
+  <div class="panel-head">
+    <span class="panel-title">Add user</span>
+    <button class="icon-btn" data-panel-close id="demo-panel-close"></button>
+  </div>
+  <div class="panel-body">
+    <div class="field">
+      <label class="label" for="demo-panel-name">Full name</label>
+      <input class="input" id="demo-panel-name" placeholder="Nur Aina Zulkifli">
+    </div>
+    <div class="field">
+      <label class="label" for="demo-panel-email">Email</label>
+      <input class="input" id="demo-panel-email" placeholder="name@techieslms.my">
+    </div>
+    <span class="label">Role</span>
+    <div class="pills" data-pills="demo-role">
+      <button class="pill is-active" data-pill="Student">Student</button>
+      <button class="pill" data-pill="Instructor">Instructor</button>
+      <button class="pill" data-pill="Admin">Admin</button>
+    </div>
+  </div>
+  <div class="panel-foot">
+    <button class="btn btn-secondary" data-panel-close>Cancel</button>
+    <button class="btn btn-primary" data-toast="userCreated" data-panel-close>Create user</button>
+  </div>
+</aside>
+<div class="panel-backdrop"></div>
+
+<div id="overlays"></div>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shell.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  /* Icon-only button and panel close need their glyphs. */
+  qs('.icon-btn[title="Edit"]').innerHTML = icon('edit', 18);
+  qs('#demo-panel-close').innerHTML = icon('close', 16);
+
+  /* --- Cards: one course card, one KPI card, one post-style card --- */
+  const course = COURSES[0];
+  qs('#demo-cards').innerHTML =
+    '<div class="course-card">' +
+      '<div class="course-thumb" style="background:' + course.thumb + '"></div>' +
+      '<div class="course-body">' +
+        categoryChip(course.category) +
+        '<div class="course-title">' + esc(course.title) + '</div>' +
+        '<div class="course-meta">' +
+          avatar(course.instInitials, course.instColor, 22) +
+          esc(course.instructor) +
+        '</div>' +
+        '<div class="course-foot">' +
+          '<span class="tiny muted">' + course.lessons + ' lessons &middot; ' + course.hours + 'h</span>' +
+          '<span class="course-price">' + esc(course.price) + '</span>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="card">' +
+      '<div class="kpi-label">Total Students</div>' +
+      '<div class="kpi-value">4,812</div>' +
+      '<div class="kpi-delta">+12% this month</div>' +
+    '</div>' +
+
+    '<div class="card">' +
+      '<div class="row" style="align-items:flex-start">' +
+        avatar('AR', '#10B981', 40) +
+        '<div style="flex:1;min-width:0">' +
+          '<div class="row" style="gap:8px;flex-wrap:wrap">' +
+            '<span class="strong">Puan Aisyah Rahman</span>' +
+            roleChip('Instructor') +
+            '<span class="tiny muted">2h ago</span>' +
+          '</div>' +
+          '<div style="margin-top:4px">' + categoryChip('Announcements') + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<p class="small" style="margin-top:12px;line-height:1.65">Pre-test for Python Competency Program is now open.</p>' +
+    '</div>';
+
+  /* --- Progress --- */
+  qs('#demo-bars').innerHTML =
+    '<div><div class="row-between tiny muted" style="margin-bottom:6px"><span>Python Competency</span><span>68%</span></div>' + progressBar(68) + '</div>' +
+    '<div><div class="row-between tiny muted" style="margin-bottom:6px"><span>Robotics Foundation</span><span>35%</span></div>' + progressBar(35) + '</div>' +
+    '<div><div class="row-between tiny muted" style="margin-bottom:6px"><span>Digital Marketing</span><span>100%</span></div>' + progressBar(100) + '</div>';
+
+  qs('#demo-ring-card').innerHTML = progressRing(68) + '<span class="ring-value">68%</span>';
+  qs('#demo-ring-result').innerHTML = progressRing(83, 'result') + '<span class="ring-value ring-value-lg">83%</span>';
+
+  /* --- Table rows: default, hover target, selected --- */
+  qs('#demo-rows').innerHTML = USERS.slice(0, 3).map(function (u, i) {
+    return '<tr' + (i === 1 ? ' class="is-selected"' : '') + '>' +
+      '<td><div class="cell-user">' + avatar(initialsOf(u.name), u.color, 32) +
+        '<div><div class="strong">' + esc(u.name) + '</div>' +
+        '<div class="cell-sub">' + esc(u.email) + '</div></div></div></td>' +
+      '<td>' + roleChip(u.role) + '</td>' +
+      '<td><button class="toggle" data-toggle="row' + u.id + '" role="switch" aria-checked="' + u.on + '"></button></td>' +
+      '<td class="muted small">' + esc(u.joined) + '</td>' +
+      '<td><div class="table-actions">' +
+        '<button class="icon-btn" title="Edit">' + icon('edit', 16) + '</button>' +
+        '<button class="icon-btn" title="Delete">' + icon('trash', 16) + '</button>' +
+      '</div></td>' +
+    '</tr>';
+  }).join('');
+
+  /* --- Accordion --- */
+  const mod = CURRICULUM[0];
+  qs('#demo-accordion').innerHTML =
+    '<div class="accordion-item is-open">' +
+      '<button class="accordion-head" data-accordion aria-expanded="true">' +
+        '<span>' + esc(mod.title) + '</span>' +
+        '<span class="row"><span class="tiny muted">' + mod.lessons.length + ' lessons</span>' +
+        '<span class="accordion-chevron">' + icon('chevronDown', 16) + '</span></span>' +
+      '</button>' +
+      '<div class="accordion-body">' +
+        mod.lessons.map(function (l, i) {
+          return '<div class="lesson-row' + (i === 0 ? ' is-current' : '') + '">' +
+            icon(LESSON_TYPE_ICON[l.type], 16, { stroke: 'var(--text-muted)' }) +
+            '<span class="lesson-title">' + esc(l.title) + '</span>' +
+            '<span class="lesson-mins">' + l.mins + ' min</span>' +
+          '</div>';
+        }).join('') +
+      '</div>' +
+    '</div>';
+
+  /* --- Sidebar item states, shown on the real dark ground --- */
+  qs('#demo-nav').innerHTML =
+    '<a class="nav-item" href="#">' + icon('dash', 20) + '<span class="nav-label">Default</span></a>' +
+    '<a class="nav-item is-active" href="#">' + icon('users', 20) + '<span class="nav-label">Active</span></a>' +
+    '<div class="nav-group is-open">' +
+      '<button class="nav-item is-parent-active">' + icon('book', 20) +
+        '<span class="nav-label">Parent expanded</span>' +
+        '<span class="nav-chevron">' + icon('chevronDown', 16) + '</span></button>' +
+      '<div class="nav-children">' +
+        '<a class="nav-child is-active" href="#"><span class="nav-dot"></span>Child active</a>' +
+        '<a class="nav-child" href="#"><span class="nav-dot"></span>Child default</a>' +
+      '</div>' +
+    '</div>' +
+    '<a class="logout" href="#">' + icon('logout', 20) + '<span class="logout-label">Logout</span></a>';
+
+  /* --- Empty state --- */
+  qs('#demo-empty').innerHTML = emptyState('No posts here yet', 'Try another category or clear your search.');
+});
+</script>
