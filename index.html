@@ -1,0 +1,326 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home — Techies LMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/controls.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/screens.css">
+
+<body data-role="public" data-route="home" data-title="Home">
+
+<div class="site">
+  <header class="site-nav" id="topnav"></header>
+
+  <main class="site-main">
+
+    <!-- ================= Hero ================= -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <span class="hero-badge"><span class="hero-badge-new">New</span>Community feed is live for every class</span>
+          <h1 class="hero-title">Learn, teach and grow<br>in one <span class="hero-accent">connected</span> platform.</h1>
+          <p class="hero-sub">Video courses, quizzes and certificates for Malaysian learners &mdash; with a community feed that keeps students, instructors and admins in sync.</p>
+          <div class="row" style="margin-top:28px">
+            <a class="btn btn-primary btn-lg" href="courses.html">Browse Courses</a>
+            <a class="btn btn-secondary btn-lg" href="community.html">Join Community</a>
+          </div>
+          <div class="hero-proof" id="hero-proof"></div>
+        </div>
+        <div class="hero-mock" id="hero-mock"></div>
+      </div>
+    </section>
+
+    <!-- ================= Stats strip ================= -->
+    <section class="band">
+      <div class="rail">
+        <div class="stat-strip">
+          <div class="stat"><div class="stat-value">128</div><div class="stat-label">Courses published</div></div>
+          <div class="stat"><div class="stat-value">4,812</div><div class="stat-label">Active students</div></div>
+          <div class="stat"><div class="stat-value">36</div><div class="stat-label">Certified instructors</div></div>
+          <div class="stat"><div class="stat-value">92%</div><div class="stat-label">Course completion rate</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Trusted by ================= -->
+    <section class="band band-tight">
+      <div class="rail">
+        <p class="trusted-label">Trusted by training providers</p>
+        <div class="trusted-row">
+          <span>Cyberjaya Tech Academy</span>
+          <span>Selangor Skills Hub</span>
+          <span>Johor Digital Institute</span>
+          <span>RoboLab Penang</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Featured courses ================= -->
+    <section class="band">
+      <div class="rail">
+        <div class="page-head">
+          <div>
+            <div class="eyebrow">Catalog</div>
+            <h2 class="band-title">Featured courses</h2>
+          </div>
+          <a class="btn btn-secondary" href="courses.html">View all 128 courses</a>
+        </div>
+        <div class="course-grid course-grid-4" id="featured"></div>
+      </div>
+    </section>
+
+    <!-- ================= Platform features ================= -->
+    <section class="band band-tint">
+      <div class="rail">
+        <div class="eyebrow">Platform</div>
+        <h2 class="band-title">Everything a modern training provider needs</h2>
+        <p class="band-sub">Three roles, one system. No plugins, no spreadsheets, no WhatsApp groups to chase.</p>
+
+        <div class="feature-grid">
+          <article class="card feature feature-wide">
+            <h3 class="feature-title">Community feed</h3>
+            <p class="feature-copy">Announcements, competitions and workshops in one stream &mdash; filtered by category, visible to every role.</p>
+            <div class="feature-demo" id="feature-feed"></div>
+          </article>
+
+          <article class="card feature">
+            <h3 class="feature-title">Fast video, anywhere</h3>
+            <p class="feature-copy">Lessons stream from a global CDN, so a 1080p video loads as fast in Kuching as in KL.</p>
+            <div class="feature-demo feature-video" id="feature-video"></div>
+          </article>
+
+          <article class="card feature">
+            <h3 class="feature-title">Quizzes that grade themselves</h3>
+            <p class="feature-copy">Multiple choice, true/false and short answers with timers, attempts and instant results.</p>
+            <div class="feature-demo" id="feature-quiz"></div>
+          </article>
+
+          <article class="card feature">
+            <h3 class="feature-title">Certificates, automatically</h3>
+            <p class="feature-copy">Reach 100% and a verifiable PDF certificate is issued &mdash; no admin needed.</p>
+            <div class="feature-demo feature-cert">
+              <div class="cert-mini">
+                <div class="cert-eyebrow">CERTIFICATE OF COMPLETION</div>
+                <div class="cert-course">Digital Marketing Asas</div>
+                <div class="cert-id">TLM-2026-04821</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card feature feature-wide">
+            <h3 class="feature-title">Built for three roles</h3>
+            <p class="feature-copy">Admins govern, instructors build, students learn &mdash; each with a dashboard shaped for the job. Google sign-in included.</p>
+            <div class="role-row" id="feature-roles"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= How it works ================= -->
+    <section class="band">
+      <div class="rail">
+        <div class="eyebrow">How it works</div>
+        <h2 class="band-title">From sign-up to certificate in three steps</h2>
+        <p class="band-sub">Most students finish their first course within eight weeks.</p>
+
+        <div class="grid-3" style="margin-top:28px">
+          <article class="card how">
+            <span class="how-n">1</span>
+            <h3 class="feature-title">Sign in with Google</h3>
+            <p class="feature-copy">One click, no passwords to remember. Students self-register; instructors are invited by an admin.</p>
+          </article>
+          <article class="card how">
+            <span class="how-n">2</span>
+            <h3 class="feature-title">Enroll and learn at your pace</h3>
+            <p class="feature-copy">Video, PDF and text lessons with quizzes at the end of every module. Pick up on any device.</p>
+          </article>
+          <article class="card how">
+            <span class="how-n">3</span>
+            <h3 class="feature-title">Earn your certificate</h3>
+            <p class="feature-copy">Pass the final quiz, download the PDF, share it with your employer.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Community highlights ================= -->
+    <section class="band band-tint">
+      <div class="rail">
+        <div class="page-head">
+          <div>
+            <div class="eyebrow">Live from the community</div>
+            <h2 class="band-title">What classes are talking about</h2>
+          </div>
+          <a class="btn btn-secondary" href="community.html">Open community</a>
+        </div>
+        <div class="grid-3" id="highlights"></div>
+      </div>
+    </section>
+
+    <!-- ================= Closing CTA ================= -->
+    <section class="band">
+      <div class="rail">
+        <div class="cta">
+          <h2 class="cta-title">Start your first course today.</h2>
+          <p class="cta-sub">Free courses available. No credit card, no commitment.</p>
+          <div class="row" style="justify-content:center;margin-top:20px">
+            <a class="btn btn-primary btn-lg" href="signin.html">Create student account</a>
+            <a class="btn btn-secondary btn-lg" href="courses.html">Browse courses</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+</div>
+
+<div id="overlays"></div>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shell.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  /* --- Hero social proof --- */
+  qs('#hero-proof').innerHTML =
+    '<div class="avatar-stack">' +
+      avatar('AH', '#34D399', 32) + avatar('SN', '#0EA5A4', 32) + avatar('LW', '#134E3A', 32) +
+      '<span class="avatar avatar-more">+</span>' +
+    '</div>' +
+    '<span class="small"><strong class="strong">' + formatCount(4812) + ' learners</strong>' +
+    ' &middot; <span class="stars">' + stars(5) + '</span> 4.8 average course rating</span>';
+
+  /* --- Hero mock: a miniature of the student dashboard --- */
+  const course = COURSES[0];
+  qs('#hero-mock').innerHTML =
+    '<div class="mock">' +
+      '<div class="mock-bar"><span class="strong small">Dashboard</span></div>' +
+      '<div class="mock-body">' +
+        '<div class="mock-kpis">' +
+          STUDENT_KPI_COMPACT.map(function (k) {
+            return '<div class="mock-kpi"><div class="mock-kpi-label">' + esc(k[0]) + '</div>' +
+              '<div class="mock-kpi-value">' + esc(k[1]) + '</div></div>';
+          }).join('') +
+        '</div>' +
+        '<div class="mock-resume">' +
+          '<div class="mock-eyebrow">CONTINUE LEARNING</div>' +
+          '<div class="row-between" style="margin-top:6px">' +
+            '<span class="strong small">' + esc(course.title) + '</span>' +
+            '<span class="btn btn-primary btn-sm">Resume</span>' +
+          '</div>' +
+          progressBar(course.progress) +
+        '</div>' +
+        '<div class="mock-chart">' +
+          '<div class="tiny muted" style="margin-bottom:8px">Enrollments</div>' +
+          '<svg viewBox="0 0 300 70" preserveAspectRatio="none" class="mock-spark">' +
+            '<path d="M0 60 L50 52 L100 46 L150 36 L200 28 L250 18 L300 8 L300 70 L0 70 Z" fill="var(--chart-area-from)"></path>' +
+            '<polyline points="0,60 50,52 100,46 150,36 200,28 250,18 300,8" fill="none" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"></polyline>' +
+          '</svg>' +
+        '</div>' +
+        '<div class="mock-post">' +
+          '<div class="row" style="gap:8px">' + avatar('AR', '#10B981', 28) +
+            '<div><div class="tiny strong">Puan Aisyah Rahman</div>' +
+            '<div class="tiny muted">Announcements &middot; 2h</div></div></div>' +
+          '<p class="tiny" style="margin-top:8px;line-height:1.55">Pre-test for Python Competency is now open &mdash; due Friday 5 PM.</p>' +
+          '<div class="tiny muted" style="margin-top:8px">24 Likes &nbsp; 8 Comments</div>' +
+        '</div>' +
+        '<div class="mock-quiz">' +
+          '<div class="ring-wrap">' + progressRing(88) + '<span class="ring-value">88%</span></div>' +
+          '<div><div class="small strong">Module 3 Quiz</div>' +
+          '<div class="tiny muted">Passed &middot; certificate unlocked</div></div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+
+  /* --- Featured courses: the first four published --- */
+  qs('#featured').innerHTML = COURSES
+    .filter(function (c) { return c.status === 'Published'; })
+    .slice(0, 4)
+    .map(function (c) {
+      return '<a class="course-card" href="course-detail.html">' +
+        '<div class="course-thumb" style="background:' + c.thumb + '"></div>' +
+        '<div class="course-body">' +
+          categoryChip(c.category) +
+          '<div class="course-title">' + esc(c.title) + '</div>' +
+          '<div class="course-meta">' + avatar(c.instInitials, c.instColor, 22) + esc(c.instructor) + '</div>' +
+          '<div class="course-meta">' + c.lessons + ' lessons &middot; ' + c.hours + 'h &middot; ' + esc(c.level) + '</div>' +
+          '<div class="course-foot">' +
+            '<span class="small"><span class="stars">' + stars(c.rating) + '</span> ' + c.rating.toFixed(1) + '</span>' +
+            '<span class="course-price">' + esc(c.price) + '</span>' +
+          '</div>' +
+        '</div>' +
+      '</a>';
+    }).join('');
+
+  /* --- Feature tile: mini feed --- */
+  qs('#feature-feed').innerHTML =
+    '<div class="pills" style="margin-bottom:12px">' +
+      '<span class="pill is-active">All</span>' +
+      '<span class="pill">Announcements</span>' +
+      '<span class="pill">Events</span>' +
+    '</div>' +
+    '<div class="stack-sm">' +
+      '<div class="mini-post"><div class="row" style="gap:8px">' + avatar('FZ', '#0EA5A4', 28) +
+        '<div class="tiny"><strong class="strong">Encik Farid Zainal</strong> <span class="muted">&middot; Events</span>' +
+        '<div>Arduino workshop, Sat 14 Sep, Lab 2</div></div></div></div>' +
+      '<div class="mini-post"><div class="row" style="gap:8px">' + avatar('KT', '#134E3A', 28) +
+        '<div class="tiny"><strong class="strong">Kiyo Tanaka</strong> ' + roleChip('Admin') +
+        '<div>National Robotics Challenge 2026 &mdash; register by 20 Sep</div>' +
+        '<div class="muted" style="margin-top:4px">56 Likes &nbsp; 19 Comments</div></div></div></div>' +
+    '</div>';
+
+  /* --- Feature tile: video --- */
+  qs('#feature-video').innerHTML =
+    '<span class="play-badge">' + icon('play', 22, { fill: 'var(--on-dark)', stroke: 'none' }) + '</span>' +
+    '<span class="video-quality">1080p</span>';
+
+  /* --- Feature tile: quiz --- */
+  qs('#feature-quiz').innerHTML =
+    '<div class="row-between tiny muted"><span>3 of 6 &middot; 18:42 left</span></div>' +
+    '<div class="dots" style="margin:10px 0">' +
+      '<span class="dot is-done"></span><span class="dot is-done"></span><span class="dot is-current"></span>' +
+      '<span class="dot"></span><span class="dot"></span><span class="dot"></span>' +
+    '</div>' +
+    '<div class="quiz-opt is-correct">' + icon('check', 14, { stroke: 'var(--primary-hover)' }) + 'x = [1, 2, 3]</div>' +
+    '<div class="quiz-opt">x = (1, 2, 3)</div>';
+
+  /* --- Feature tile: roles --- */
+  qs('#feature-roles').innerHTML = ['Admin', 'Instructor', 'Student'].map(function (r) {
+    const copy = {
+      Admin: 'Users, activity log, oversight and settings.',
+      Instructor: 'Build courses, set quizzes, track students.',
+      Student: 'Enrol, learn, pass, collect certificates.'
+    };
+    return '<div class="role-tile">' + roleChip(r) +
+      '<p class="feature-copy" style="margin-top:10px">' + copy[r] + '</p></div>';
+  }).join('');
+
+  /* --- Community highlights --- */
+  qs('#highlights').innerHTML = COMMUNITY_HIGHLIGHTS.map(function (p) {
+    return '<article class="card">' +
+      '<div class="row" style="align-items:flex-start">' +
+        avatar(p.initials, p.color, 40) +
+        '<div style="flex:1;min-width:0">' +
+          '<div class="row" style="gap:8px;flex-wrap:wrap">' +
+            '<span class="strong">' + esc(p.author) + '</span>' + roleChip(p.role) +
+          '</div>' +
+          '<div class="tiny muted" style="margin-top:2px">' + esc(p.time) + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="margin-top:10px">' + categoryChip(p.category) + '</div>' +
+      '<p class="small" style="margin-top:10px;line-height:1.65">' + esc(p.body) + '</p>' +
+      '<div class="tiny muted" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">' +
+        p.likes + ' Likes &nbsp; ' + p.comments + ' Comments</div>' +
+    '</article>';
+  }).join('');
+});
+</script>
