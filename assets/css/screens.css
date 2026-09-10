@@ -1012,3 +1012,162 @@
   justify-content: center;
   flex-shrink: 0;
 }
+
+
+/* ==========================================================================
+   Mobile frame (mobile-student-dashboard.html)
+   --------------------------------------------------------------------------
+   Two phone frames side by side on a desktop page: the dashboard, and the
+   same screen with the drawer open. This is the only screen in the build
+   designed below 1180px.
+   ========================================================================== */
+
+.mobile-stage {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 40px var(--content-pad) 80px;
+}
+
+.mobile-head { margin-bottom: 32px; max-width: 640px; }
+
+.frames {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.frame-label {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  margin-bottom: 12px;
+}
+
+.phone {
+  width: 390px;
+  max-width: 100%;
+  height: 780px;
+  background: var(--background);
+  border: 10px solid var(--sidebar);
+  border-radius: 36px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 48px rgba(15, 31, 25, 0.16);
+}
+
+.phone-bar {
+  height: 56px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  flex-shrink: 0;
+}
+
+.phone-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  padding: 6px;
+  border-radius: var(--radius-sm);
+}
+
+.phone-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.phone-body-dim { filter: blur(1px); }
+
+.m-resume {
+  background: var(--sidebar);
+  color: var(--on-dark);
+  border-radius: var(--radius-card);
+  padding: 16px;
+}
+
+.m-resume .bar { background: var(--on-dark-20); }
+
+.m-kpis {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.m-kpi {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px;
+}
+
+.m-section {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  margin-top: 6px;
+}
+
+.m-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px;
+}
+
+.phone-tabbar {
+  height: 62px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  flex-shrink: 0;
+}
+
+.phone-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.phone-tab.is-active { color: var(--primary-hover); }
+
+.phone-drawer {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 272px;
+  background: var(--sidebar);
+  color: var(--on-dark);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 12px;
+  box-shadow: var(--shadow-panel);
+}
+
+.phone-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 31, 25, 0.4);
+  z-index: 1;
+}

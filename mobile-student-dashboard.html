@@ -1,0 +1,155 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mobile Student Dashboard — Techies LMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/controls.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/screens.css">
+
+<body data-role="student" data-route="mobile" data-title="Mobile Student Dashboard">
+
+<div class="mobile-stage">
+
+  <header class="mobile-head">
+    <a class="btn-ghost" href="student-dashboard.html" style="padding:0;font-size:var(--text-sm)">&larr; Back to desktop</a>
+    <h1 class="library-title" style="margin-top:12px">Mobile student dashboard</h1>
+    <p class="muted">The same screen at phone width. The sidebar becomes a hamburger drawer; the top bar keeps search, bell and avatar. Second frame shows the drawer open.</p>
+  </header>
+
+  <div class="frames">
+
+    <!-- ================= Frame 1: dashboard ================= -->
+    <div>
+      <div class="frame-label">Dashboard</div>
+      <div class="phone">
+        <div class="phone-bar">
+          <button class="phone-icon" id="m-menu"></button>
+          <span class="brand-name" style="font-size:16px" data-brand="short"></span>
+          <div class="row" style="gap:8px;margin-left:auto">
+            <button class="phone-icon" id="m-search"></button>
+            <button class="phone-icon" id="m-bell"></button>
+            <span class="avatar avatar-sm" style="background:var(--sidebar-active)">AH</span>
+          </div>
+        </div>
+
+        <div class="phone-body" id="m-body"></div>
+
+        <nav class="phone-tabbar" id="m-tabbar"></nav>
+      </div>
+    </div>
+
+    <!-- ================= Frame 2: drawer open ================= -->
+    <div>
+      <div class="frame-label">Drawer open</div>
+      <div class="phone">
+        <div class="phone-bar">
+          <button class="phone-icon" id="m-close"></button>
+          <span class="brand-name" style="font-size:16px" data-brand="short"></span>
+        </div>
+
+        <div class="phone-body phone-body-dim" id="m-body-2"></div>
+
+        <aside class="phone-drawer" id="m-drawer"></aside>
+        <div class="phone-scrim"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="overlays"></div>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shell.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  qs('#m-menu').innerHTML = icon('menu', 20);
+  qs('#m-close').innerHTML = icon('close', 20);
+  qs('#m-search').innerHTML = icon('search', 18);
+  qs('#m-bell').innerHTML = icon('bell', 18);
+
+  const course = COURSES[0];
+
+  /* --- Stacked dashboard content --- */
+  const body =
+    '<div class="m-resume">' +
+      '<div class="mock-eyebrow">CONTINUE LEARNING</div>' +
+      '<div class="strong" style="margin-top:6px">' + esc(course.title) + '</div>' +
+      '<div class="tiny" style="color:var(--on-dark-70);margin-top:4px">Up next &middot; Lists and tuples</div>' +
+      '<div style="margin-top:12px">' + progressBar(course.progress) + '</div>' +
+      '<div class="row-between tiny" style="color:var(--on-dark-70);margin-top:6px">' +
+        '<span>6 of 17 lessons</span><span>' + course.progress + '%</span></div>' +
+      '<button class="btn btn-primary btn-sm btn-block" style="margin-top:14px">Resume</button>' +
+    '</div>' +
+
+    '<div class="m-kpis">' + STUDENT_KPI_COMPACT.map(function (k) {
+      return '<div class="m-kpi"><div class="mock-kpi-label">' + esc(k[0]) + '</div>' +
+        '<div class="mock-kpi-value">' + esc(k[1]) + '</div></div>';
+    }).join('') + '</div>' +
+
+    '<div class="m-section">Upcoming deadlines</div>' +
+    DEADLINES.slice(0, 2).map(function (d) {
+      return '<div class="m-row">' +
+        '<span class="deadline-date" style="border-color:' + d.tone + '">' + esc(d.due) + '</span>' +
+        '<div style="flex:1;min-width:0">' +
+          '<div class="small strong truncate">' + esc(d.title) + '</div>' +
+          '<div class="tiny muted truncate">' + esc(d.course) + '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('') +
+
+    '<div class="m-section">From the community</div>' +
+    COMMUNITY_HIGHLIGHTS.slice(0, 1).map(function (p) {
+      return '<div class="mini-post">' +
+        '<div class="row" style="gap:8px">' + avatar(p.initials, p.color, 28) +
+          '<div class="tiny"><strong class="strong">' + esc(p.author) + '</strong>' +
+          '<div class="muted">' + esc(p.category) + ' &middot; ' + esc(p.time) + '</div></div></div>' +
+        '<p class="tiny" style="margin-top:8px;line-height:1.55">' + esc(p.body) + '</p>' +
+        '</div>';
+    }).join('');
+
+  qs('#m-body').innerHTML = body;
+  qs('#m-body-2').innerHTML = body;
+
+  /* --- Bottom tab bar --- */
+  qs('#m-tabbar').innerHTML = [
+    ['dash', 'Home', true], ['book', 'Courses', false],
+    ['chat', 'Community', false], ['gear', 'Settings', false]
+  ].map(function (t) {
+    return '<span class="phone-tab' + (t[2] ? ' is-active' : '') + '">' +
+      icon(t[0], 20) + '<span>' + t[1] + '</span></span>';
+  }).join('');
+
+  /* --- Drawer: the same nav tree the desktop sidebar renders --- */
+  qs('#m-drawer').innerHTML =
+    '<div class="row" style="gap:10px;padding:16px">' +
+      '<span class="brand-logo" style="width:32px;height:32px;font-size:8px;border-color:var(--on-dark-40);background:none;color:var(--on-dark-60)" data-brand="logo"></span>' +
+      '<span class="brand-name" style="font-size:18px" data-brand="short"></span>' +
+    '</div>' +
+    '<a class="nav-item is-active" href="#">' + icon('dash', 20) + '<span class="nav-label">Dashboard</span></a>' +
+    '<a class="nav-item" href="#">' + icon('chat', 20) + '<span class="nav-label">Community</span></a>' +
+    '<div class="nav-group is-open">' +
+      '<button class="nav-item is-parent-active">' + icon('book', 20) +
+        '<span class="nav-label">My Courses</span>' +
+        '<span class="nav-chevron">' + icon('chevronDown', 16) + '</span></button>' +
+      '<div class="nav-children">' +
+        '<a class="nav-child" href="#"><span class="nav-dot"></span>Enrolled</a>' +
+        '<a class="nav-child" href="#"><span class="nav-dot"></span>Browse Catalog</a>' +
+        '<a class="nav-child" href="#"><span class="nav-dot"></span>Certificates</a>' +
+      '</div>' +
+    '</div>' +
+    '<a class="nav-item" href="#">' + icon('gear', 20) + '<span class="nav-label">Settings</span></a>' +
+    '<a class="logout" href="#" style="margin-top:auto">' + icon('logout', 20) +
+      '<span class="logout-label">Logout</span></a>';
+
+  applyBrand();
+});
+</script>
