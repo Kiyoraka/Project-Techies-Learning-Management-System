@@ -1,0 +1,222 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Create Course — Techies LMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/controls.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/screens.css">
+
+<body data-role="instructor" data-route="inst.create" data-title="Create Course">
+
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="app-main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content">
+
+      <div class="page-head">
+        <div>
+          <h1 class="page-title">Create Course</h1>
+          <p class="page-sub">Four steps from a title to a course awaiting review.</p>
+        </div>
+        <button class="btn btn-secondary" data-toast="save">Save draft</button>
+      </div>
+
+      <div class="builder">
+        <aside class="stepper" id="builder-steps"></aside>
+
+        <div>
+          <!-- ================= Basics ================= -->
+          <div data-step-panel="Basics">
+            <div class="card">
+              <h2 class="card-title" style="margin-bottom:16px">Course basics</h2>
+              <div class="field">
+                <label class="label" for="c-title">Title</label>
+                <input class="input" id="c-title" value="Python Competency Program">
+              </div>
+              <div class="field">
+                <label class="label" for="c-sub">Subtitle</label>
+                <input class="input" id="c-sub" value="From zero to writing real automation scripts in 8 weeks.">
+              </div>
+              <div class="grid-2">
+                <div class="field">
+                  <label class="label" for="c-cat">Category</label>
+                  <select class="select" id="c-cat">
+                    <option>Programming</option><option>Robotics</option>
+                    <option>Business</option><option>Data</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="label" for="c-level">Level</label>
+                  <select class="select" id="c-level">
+                    <option>Beginner</option><option selected>Intermediate</option><option>Advanced</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Thumbnail</label>
+                <div class="upload-slot">
+                  <span class="course-swatch" style="background:var(--primary);width:56px;height:40px"></span>
+                  <div>
+                    <div class="strong small">Upload to Bunny.net</div>
+                    <div class="tiny muted">1280x720 JPG or PNG</div>
+                  </div>
+                  <button class="btn btn-secondary btn-sm">Choose file</button>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label" for="c-desc">Description</label>
+                <textarea class="textarea" id="c-desc">An eight-week programme for working adults who want to automate their daily tasks. You will start from installing Python and finish by writing scripts that read spreadsheets, call APIs and send reports.</textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Curriculum ================= -->
+          <div data-step-panel="Curriculum" hidden>
+            <div class="page-head" style="margin-bottom:14px">
+              <div>
+                <h2 class="card-title">Curriculum</h2>
+                <p class="tiny muted">Drag to reorder. Click a lesson to edit it.</p>
+              </div>
+              <button class="btn btn-secondary btn-sm" data-toast="save">Add module</button>
+            </div>
+            <div id="builder-modules"></div>
+          </div>
+
+          <!-- ================= Pricing ================= -->
+          <div data-step-panel="Pricing" hidden>
+            <div class="card">
+              <h2 class="card-title" style="margin-bottom:16px">Pricing</h2>
+              <span class="label">Access</span>
+              <div class="pills" data-pills="pricing" style="margin-bottom:20px">
+                <button class="pill" data-pill="Free">Free</button>
+                <button class="pill is-active" data-pill="Paid">Paid</button>
+              </div>
+              <div class="grid-2">
+                <div class="field">
+                  <label class="label" for="c-price">Price (MYR)</label>
+                  <input class="input" id="c-price" value="299">
+                </div>
+                <div class="field">
+                  <label class="label" for="c-promo">Promotional price</label>
+                  <input class="input" id="c-promo" placeholder="Optional">
+                </div>
+              </div>
+              <div class="toggle-row">
+                <div><div class="strong">Issue a certificate on completion</div>
+                  <div class="tiny muted">Students reaching 100 percent get a verifiable PDF</div></div>
+                <button class="toggle" data-toggle="cert" role="switch" aria-checked="true"></button>
+              </div>
+              <div class="toggle-row">
+                <div><div class="strong">Allow instalments</div>
+                  <div class="tiny muted">Split into three monthly payments</div></div>
+                <button class="toggle" data-toggle="instal" role="switch" aria-checked="false"></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= Publish ================= -->
+          <div data-step-panel="Publish" hidden>
+            <div class="card">
+              <h2 class="card-title" style="margin-bottom:16px">Ready to publish</h2>
+              <div class="stack-sm" id="publish-checks"></div>
+              <div class="divider"></div>
+              <p class="small muted">Submitting sends the course to an administrator for review. You will be notified once it is approved.</p>
+            </div>
+          </div>
+
+          <div class="row-between" style="margin-top:20px">
+            <button class="btn btn-secondary" id="builder-back">Back</button>
+            <button class="btn btn-primary" id="builder-next">Continue</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ================= Lesson editor drawer ================= -->
+<aside class="drawer" id="lesson-drawer">
+  <div class="panel-head">
+    <span class="panel-title" id="drawer-title">Edit lesson</span>
+    <button class="icon-btn" data-panel-close id="drawer-close"></button>
+  </div>
+  <div class="panel-body">
+    <div class="field">
+      <label class="label" for="lesson-name">Lesson title</label>
+      <input class="input" id="lesson-name">
+    </div>
+    <div class="grid-2">
+      <div class="field">
+        <label class="label" for="lesson-type">Type</label>
+        <select class="select" id="lesson-type">
+          <option>Video</option><option>PDF</option><option>Text</option><option>Quiz</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="label" for="lesson-mins">Duration (min)</label>
+        <input class="input" id="lesson-mins" type="number">
+      </div>
+    </div>
+
+    <span class="label">Video</span>
+    <div class="upload-slot" style="margin-bottom:14px">
+      <span class="course-swatch" style="background:var(--sidebar-active);width:56px;height:40px"></span>
+      <div>
+        <div class="strong small">lesson-07-lists-and-tuples.mp4</div>
+        <div class="tiny muted">Uploading to Bunny Stream</div>
+      </div>
+    </div>
+    <div class="bar bar-lg"><span class="bar-fill" style="width:72%"></span></div>
+    <p class="tiny muted" style="margin-top:6px">72% &middot; 184 MB of 256 MB</p>
+
+    <div class="divider"></div>
+    <div class="field">
+      <label class="label" for="lesson-notes">Lesson notes</label>
+      <textarea class="textarea" id="lesson-notes" placeholder="Shown under the video in the player"></textarea>
+    </div>
+  </div>
+  <div class="panel-foot">
+    <button class="btn btn-secondary" data-panel-close>Cancel</button>
+    <button class="btn btn-primary" data-panel-close data-toast="save">Save lesson</button>
+  </div>
+</aside>
+<div class="panel-backdrop"></div>
+
+<div id="overlays"></div>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shell.js"></script>
+<script src="assets/js/pages/create-course.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  qs('#drawer-close').innerHTML = icon('close', 16);
+
+  const checks = [
+    ['Title, subtitle and description', true],
+    ['Category and level', true],
+    ['Thumbnail uploaded', true],
+    ['At least one module with lessons', true],
+    ['Price set', true],
+    ['Final quiz attached', false]
+  ];
+
+  qs('#publish-checks').innerHTML = checks.map(function (c) {
+    return '<div class="row" style="gap:10px">' +
+      (c[1]
+        ? icon('check', 16, { stroke: 'var(--primary)' })
+        : icon('alert', 16, { stroke: 'var(--warning)' })) +
+      '<span class="small">' + esc(c[0]) + '</span>' +
+      (c[1] ? '' : '<span class="chip chip-warning" style="margin-left:auto">Optional</span>') +
+      '</div>';
+  }).join('');
+});
+</script>
