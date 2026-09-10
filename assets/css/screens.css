@@ -698,3 +698,49 @@
   border-radius: 3px;
   display: inline-block;
 }
+
+
+/* ==========================================================================
+   Settings pages (admin, instructor, student)
+   ========================================================================== */
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gutter);
+  align-items: start;
+}
+
+.upload-slot {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1.5px dashed var(--mint-border);
+  border-radius: var(--radius-md);
+  background: var(--mint-fill);
+  padding: 14px;
+}
+
+.upload-slot > div { flex: 1; }
+
+.swatches { display: flex; gap: 12px; }
+
+.swatch {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 2px transparent;
+}
+
+.swatch.is-chosen {
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--text);
+}
+
+/* Small square course thumbnail used in admin tables. */
+.course-swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-control);
+  flex-shrink: 0;
+  display: inline-block;
+}

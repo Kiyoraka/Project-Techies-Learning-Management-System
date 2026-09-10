@@ -1,0 +1,251 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settings — Techies LMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/controls.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/screens.css">
+
+<body data-role="admin" data-route="admin.settings" data-title="Settings">
+
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="app-main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content">
+
+      <div class="page-head">
+        <div>
+          <h1 class="page-title">Settings</h1>
+          <p class="page-sub">Site identity, appearance, authentication, storage and email.</p>
+        </div>
+        <button class="btn btn-primary" data-toast="save">Save changes</button>
+      </div>
+
+      <div class="tabs" data-tabs="settings">
+        <button class="tab is-active" data-tab="General">General</button>
+        <button class="tab" data-tab="Appearance">Appearance</button>
+        <button class="tab" data-tab="Authentication">Authentication</button>
+        <button class="tab" data-tab="Storage">Storage</button>
+        <button class="tab" data-tab="Email">Email</button>
+      </div>
+
+      <!-- ================= General ================= -->
+      <div data-tab-panel="settings:General">
+        <div class="settings-grid">
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Site identity</h2>
+            <div class="field">
+              <label class="label" for="set-name">Site name</label>
+              <input class="input" id="set-name" value="Techies Learning Management System">
+            </div>
+            <div class="field">
+              <label class="label" for="set-tagline">Tagline</label>
+              <input class="input" id="set-tagline" value="Practical training for Malaysian learners">
+            </div>
+            <div class="field">
+              <label class="label" for="set-contact">Contact email</label>
+              <input class="input" id="set-contact" type="email" value="hello@techieslms.my">
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Logo</h2>
+            <div class="upload-slot">
+              <span class="brand-logo" data-brand="logo"></span>
+              <div>
+                <div class="strong small">Upload a logo</div>
+                <div class="tiny muted">SVG or PNG, 40x40 minimum</div>
+              </div>
+              <button class="btn btn-secondary btn-sm">Choose file</button>
+            </div>
+            <div class="field" style="margin-top:20px">
+              <label class="label" for="set-tz">Timezone</label>
+              <select class="select" id="set-tz">
+                <option>Asia/Kuala_Lumpur (UTC+8)</option>
+                <option>Asia/Singapore (UTC+8)</option>
+                <option>Asia/Jakarta (UTC+7)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= Appearance ================= -->
+      <div data-tab-panel="settings:Appearance" hidden>
+        <div class="settings-grid">
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:6px">Accent colour</h2>
+            <p class="small muted" style="margin-bottom:16px">Every option is a green. The sidebar stays forest in all themes.</p>
+            <div class="swatches" id="swatches"></div>
+          </div>
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Display</h2>
+            <div class="toggle-row">
+              <div><div class="strong">Show community teaser on landing</div>
+                <div class="tiny muted">Highlights three recent posts</div></div>
+              <button class="toggle" data-toggle="teaser" role="switch" aria-checked="true"></button>
+            </div>
+            <div class="toggle-row">
+              <div><div class="strong">Show instructor names publicly</div>
+                <div class="tiny muted">On course cards and detail pages</div></div>
+              <button class="toggle" data-toggle="instnames" role="switch" aria-checked="true"></button>
+            </div>
+            <div class="toggle-row">
+              <div><div class="strong">Maintenance mode</div>
+                <div class="tiny muted">Take the site offline for everyone but admins</div></div>
+              <button class="toggle" data-toggle="maintenance" role="switch" aria-checked="false"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= Authentication ================= -->
+      <div data-tab-panel="settings:Authentication" hidden>
+        <div class="settings-grid">
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Google sign-in</h2>
+            <div class="toggle-row">
+              <div><div class="strong">Enable Google sign-in</div>
+                <div class="tiny muted">Students sign in with one click</div></div>
+              <button class="toggle" data-toggle="google" role="switch" aria-checked="true"></button>
+            </div>
+            <div class="field" style="margin-top:16px">
+              <label class="label" for="set-client">Client ID</label>
+              <input class="input" id="set-client" value="482910-techieslms.apps.googleusercontent.com">
+            </div>
+            <div class="field">
+              <label class="label" for="set-secret">Client secret</label>
+              <input class="input" id="set-secret" type="password" value="••••••••••••••••">
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Registration</h2>
+            <div class="toggle-row">
+              <div><div class="strong">Allow student self sign-up</div>
+                <div class="tiny muted">Instructors are always invited by an admin</div></div>
+              <button class="toggle" data-toggle="selfSignup" role="switch" aria-checked="true"></button>
+            </div>
+            <div class="toggle-row">
+              <div><div class="strong">Require email verification</div>
+                <div class="tiny muted">New accounts confirm before enrolling</div></div>
+              <button class="toggle" data-toggle="verify" role="switch" aria-checked="true"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= Storage ================= -->
+      <div data-tab-panel="settings:Storage" hidden>
+        <div class="settings-grid">
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Bunny.net storage</h2>
+            <div class="field">
+              <label class="label" for="set-zone">Storage zone</label>
+              <input class="input" id="set-zone" value="techieslms-media">
+            </div>
+            <div class="field">
+              <label class="label" for="set-cdn">CDN pull URL</label>
+              <input class="input" id="set-cdn" value="https://techieslms.b-cdn.net">
+            </div>
+            <div class="field">
+              <label class="label" for="set-key">Access key</label>
+              <input class="input" id="set-key" type="password" value="••••••••••••••••">
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Upload limits</h2>
+            <div class="field">
+              <label class="label" for="set-video">Max video size</label>
+              <select class="select" id="set-video">
+                <option>2 GB</option><option>5 GB</option><option>10 GB</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="label" for="set-doc">Max document size</label>
+              <select class="select" id="set-doc">
+                <option>25 MB</option><option>50 MB</option><option>100 MB</option>
+              </select>
+            </div>
+            <div class="toggle-row">
+              <div><div class="strong">Transcode uploads to 1080p</div>
+                <div class="tiny muted">Handled by Bunny Stream</div></div>
+              <button class="toggle" data-toggle="transcode" role="switch" aria-checked="true"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= Email ================= -->
+      <div data-tab-panel="settings:Email" hidden>
+        <div class="settings-grid">
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Sender</h2>
+            <div class="field">
+              <label class="label" for="set-from">From name</label>
+              <input class="input" id="set-from" value="Techies LMS">
+            </div>
+            <div class="field">
+              <label class="label" for="set-fromaddr">From address</label>
+              <input class="input" id="set-fromaddr" type="email" value="no-reply@techieslms.my">
+            </div>
+            <button class="btn btn-secondary" data-toast="message">Send test email</button>
+          </div>
+
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Notifications</h2>
+            <div class="toggle-row">
+              <div><div class="strong">Enrollment confirmation</div>
+                <div class="tiny muted">Sent when a student joins a course</div></div>
+              <button class="toggle" data-toggle="emailNotif" role="switch" aria-checked="true"></button>
+            </div>
+            <div class="toggle-row">
+              <div><div class="strong">Weekly digest</div>
+                <div class="tiny muted">Community highlights every Monday</div></div>
+              <button class="toggle" data-toggle="weekly" role="switch" aria-checked="true"></button>
+            </div>
+            <div class="toggle-row">
+              <div><div class="strong">Certificate issued</div>
+                <div class="tiny muted">Sent with the PDF attached</div></div>
+              <button class="toggle" data-toggle="certmail" role="switch" aria-checked="true"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div id="overlays"></div>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shell.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  let chosen = ACCENT_SWATCHES[0];
+
+  function paint() {
+    qs('#swatches').innerHTML = ACCENT_SWATCHES.map(function (hex) {
+      return '<button class="swatch' + (hex === chosen ? ' is-chosen' : '') + '"' +
+        ' data-swatch="' + hex + '" style="background:' + hex + '" title="' + hex + '"></button>';
+    }).join('');
+  }
+  paint();
+
+  on(document, 'click', '[data-swatch]', function (event, el) {
+    event.preventDefault();
+    chosen = el.getAttribute('data-swatch');
+    paint();
+  });
+});
+</script>
