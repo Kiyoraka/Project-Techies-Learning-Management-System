@@ -1,0 +1,135 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard — Techies LMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/controls.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/screens.css">
+
+<body data-role="student" data-route="stu.dashboard" data-title="Dashboard">
+
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="app-main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content">
+
+      <section class="resume-card" id="resume"></section>
+
+      <div class="kpi-grid" style="margin-top:24px" id="kpis"></div>
+
+      <div class="dash-split" style="margin-top:24px">
+        <section class="card">
+          <div class="card-head">
+            <h2 class="card-title">Continue where you left off</h2>
+            <a class="card-link" href="student-enrolled.html">All courses</a>
+          </div>
+          <div class="stack-sm" id="in-progress"></div>
+        </section>
+
+        <section class="card">
+          <div class="card-head">
+            <h2 class="card-title">Upcoming deadlines</h2>
+          </div>
+          <div class="card-list" id="deadlines"></div>
+        </section>
+      </div>
+
+      <section class="card" style="margin-top:24px">
+        <div class="card-head">
+          <h2 class="card-title">Recent community posts</h2>
+          <a class="card-link" href="student-community.html">Open community</a>
+        </div>
+        <div class="grid-3" id="recent-posts"></div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div id="overlays"></div>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shell.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  /* --- Continue Learning hero --- */
+  const course = COURSES[0];
+  const lesson = CURRICULUM.reduce(function (found, m) {
+    return found || m.lessons.filter(function (l) { return l.id === CURRENT_LESSON_ID; })[0];
+  }, null);
+
+  qs('#resume').innerHTML =
+    '<div class="resume-body">' +
+      '<div class="mock-eyebrow">CONTINUE LEARNING</div>' +
+      '<h1 class="resume-title">' + esc(course.title) + '</h1>' +
+      '<p class="resume-next">Up next &middot; ' + esc(lesson.title) + ' &middot; ' + lesson.mins + ' min</p>' +
+      '<div class="resume-progress">' +
+        '<div class="row-between tiny" style="margin-bottom:6px">' +
+          '<span>' + COMPLETED_LESSONS.length + ' of 17 lessons complete</span>' +
+          '<span>' + course.progress + '%</span></div>' +
+        progressBar(course.progress) +
+      '</div>' +
+      '<a class="btn btn-primary" style="margin-top:20px" href="student-player.html">Resume</a>' +
+    '</div>' +
+    '<div class="resume-art"><span class="shape shape-a"></span><span class="shape shape-b"></span></div>';
+
+  /* --- KPI cards --- */
+  qs('#kpis').innerHTML = KPIS.student.map(function (k) {
+    return '<div class="card">' +
+      '<div class="kpi-label">' + esc(k[0]) + '</div>' +
+      '<div class="kpi-value">' + esc(k[1]) + '</div>' +
+      '<div class="kpi-delta kpi-delta-muted">' + esc(k[2]) + '</div>' +
+      '</div>';
+  }).join('');
+
+  /* --- Enrolled courses still in progress --- */
+  const enrolled = COURSES.filter(function (c) {
+    return ENROLLED_COURSE_IDS.indexOf(c.id) !== -1 && c.progress < 100;
+  });
+
+  qs('#in-progress').innerHTML = enrolled.map(function (c) {
+    return '<div class="row" style="gap:12px">' +
+      '<span class="course-swatch" style="background:' + c.thumb + '"></span>' +
+      '<div style="flex:1;min-width:0">' +
+        '<div class="small strong truncate">' + esc(c.title) + '</div>' +
+        '<div class="row" style="gap:10px;margin-top:6px">' +
+          progressBar(c.progress) +
+          '<span class="tiny muted" style="flex-shrink:0">' + c.progress + '%</span>' +
+        '</div>' +
+      '</div>' +
+      '<a class="btn btn-secondary btn-sm" href="student-player.html">Continue</a>' +
+      '</div>';
+  }).join('');
+
+  /* --- Deadlines --- */
+  qs('#deadlines').innerHTML = DEADLINES.map(function (d) {
+    return '<div class="row" style="align-items:flex-start;gap:10px">' +
+      '<span class="deadline-date" style="border-color:' + d.tone + '">' + esc(d.due) + '</span>' +
+      '<div style="flex:1;min-width:0">' +
+        '<div class="small strong">' + esc(d.title) + '</div>' +
+        '<div class="tiny muted">' + esc(d.course) + '</div>' +
+      '</div>' +
+      '<span class="tiny" style="color:' + d.tone + ';font-weight:600">' + esc(d.label) + '</span>' +
+      '</div>';
+  }).join('');
+
+  /* --- Community snippet --- */
+  qs('#recent-posts').innerHTML = COMMUNITY_HIGHLIGHTS.map(function (p) {
+    return '<div class="mini-post">' +
+      '<div class="row" style="gap:8px">' + avatar(p.initials, p.color, 28) +
+        '<div class="tiny"><strong class="strong">' + esc(p.author) + '</strong>' +
+        '<div class="muted">' + esc(p.category) + ' &middot; ' + esc(p.time) + '</div></div></div>' +
+      '<p class="tiny" style="margin-top:8px;line-height:1.55">' + esc(p.body) + '</p>' +
+      '</div>';
+  }).join('');
+});
+</script>

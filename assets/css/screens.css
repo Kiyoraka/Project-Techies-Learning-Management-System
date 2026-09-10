@@ -805,3 +805,56 @@
   font-weight: var(--weight-semibold);
   flex-shrink: 0;
 }
+
+
+/* ==========================================================================
+   Student dashboard - Continue Learning hero
+   ========================================================================== */
+
+.resume-card {
+  background: var(--sidebar);
+  color: var(--on-dark);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+}
+
+.resume-body { padding: 28px 32px; position: relative; z-index: 1; }
+
+.resume-title {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.02em;
+  margin-top: 6px;
+}
+
+.resume-next { color: var(--on-dark-70); font-size: var(--text-sm); margin-top: 6px; }
+
+.resume-progress { max-width: 420px; margin-top: 20px; color: var(--on-dark-70); }
+.resume-progress .bar { background: var(--on-dark-20); }
+
+.resume-art { position: relative; overflow: hidden; }
+
+.shape-a {
+  position: absolute;
+  right: -50px;
+  top: -60px;
+  width: 220px;
+  height: 220px;
+  border-radius: var(--radius-pill);
+  background: var(--primary);
+  opacity: 0.45;
+}
+
+.shape-b {
+  position: absolute;
+  right: 90px;
+  bottom: -80px;
+  width: 170px;
+  height: 170px;
+  border-radius: var(--radius-pill);
+  background: var(--chart-2);
+  opacity: 0.3;
+}
