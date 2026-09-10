@@ -1,0 +1,103 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>User Management — Techies LMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/controls.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/screens.css">
+
+<body data-role="admin" data-route="admin.users" data-title="User Management">
+
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="app-main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content">
+
+      <div class="page-head">
+        <div>
+          <h1 class="page-title">User Management</h1>
+          <p class="page-sub">Administrators, instructors and students in one table.</p>
+        </div>
+        <button class="btn btn-primary" data-panel-open="user-panel">Add User</button>
+      </div>
+
+      <div class="tabs" id="user-tabs"></div>
+
+      <div class="toolbar">
+        <div class="toolbar-grow" id="user-search-wrap"></div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-scroll">
+          <table class="table">
+            <thead>
+              <tr><th>User</th><th>Role</th><th>Status</th><th>Joined</th><th></th></tr>
+            </thead>
+            <tbody id="user-rows"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ================= Add user side panel ================= -->
+<aside class="panel" id="user-panel">
+  <div class="panel-head">
+    <span class="panel-title">Add user</span>
+    <button class="icon-btn" data-panel-close id="user-panel-close"></button>
+  </div>
+  <div class="panel-body">
+    <div class="field">
+      <label class="label" for="user-name">Full name</label>
+      <input class="input" id="user-name" placeholder="Nur Aina Zulkifli">
+    </div>
+    <div class="field">
+      <label class="label" for="user-email">Email</label>
+      <input class="input" id="user-email" type="email" placeholder="name@techieslms.my">
+    </div>
+
+    <span class="label">Role</span>
+    <div class="pills" data-pills="user-role" style="margin-bottom:20px">
+      <button class="pill is-active" data-pill="Student">Student</button>
+      <button class="pill" data-pill="Instructor">Instructor</button>
+      <button class="pill" data-pill="Admin">Admin</button>
+    </div>
+
+    <div class="toggle-row">
+      <div>
+        <div class="strong">Invite by email</div>
+        <div class="tiny muted">Send a sign-up link instead of setting a password</div>
+      </div>
+      <button class="toggle" data-toggle="invite" id="user-invite" role="switch" aria-checked="false"></button>
+    </div>
+  </div>
+  <div class="panel-foot">
+    <button class="btn btn-secondary" data-panel-close>Cancel</button>
+    <button class="btn btn-primary" id="user-panel-submit">Create user</button>
+  </div>
+</aside>
+<div class="panel-backdrop"></div>
+
+<div id="overlays"></div>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shell.js"></script>
+<script src="assets/js/pages/admin-users.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  qs('#user-search-wrap').innerHTML =
+    icon('search', 16, { stroke: 'var(--text-muted)' }) +
+    '<input class="input input-search" id="user-search" placeholder="Search by name or email">';
+  qs('#user-panel-close').innerHTML = icon('close', 16);
+});
+</script>

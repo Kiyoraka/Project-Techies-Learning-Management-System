@@ -1,0 +1,79 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Activity Log — Techies LMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/controls.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/screens.css">
+
+<body data-role="admin" data-route="admin.activity" data-title="Activity Log">
+
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="app-main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content">
+
+      <div class="page-head">
+        <div>
+          <h1 class="page-title">Activity Log</h1>
+          <p class="page-sub">Every action taken across the platform, newest first.</p>
+        </div>
+        <button class="btn btn-secondary" data-toast="download">Export CSV</button>
+      </div>
+
+      <div class="toolbar">
+        <select class="select" id="activity-range-select" style="width:auto">
+          <option>Last 7 days</option>
+          <option>Last 30 days</option>
+          <option>This year</option>
+        </select>
+        <select class="select" id="activity-role" style="width:auto">
+          <option>All</option>
+          <option>Admin</option>
+          <option>Instructor</option>
+          <option>Student</option>
+        </select>
+        <select class="select" style="width:auto">
+          <option>All actions</option>
+          <option>Enrolled</option>
+          <option>Published course</option>
+          <option>Submitted quiz</option>
+        </select>
+      </div>
+
+      <div class="table-card">
+        <div class="table-scroll">
+          <table class="table table-dense">
+            <thead>
+              <tr><th>Time</th><th>User</th><th>Role</th><th>Action</th><th>Target</th><th>IP</th></tr>
+            </thead>
+            <tbody id="activity-rows"></tbody>
+          </table>
+        </div>
+        <div class="table-foot">
+          <span id="activity-range"></span>
+          <div class="row">
+            <span class="small" id="activity-page"></span>
+            <button class="btn btn-secondary btn-sm" id="activity-prev">Previous</button>
+            <button class="btn btn-secondary btn-sm" id="activity-next">Next</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div id="overlays"></div>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shell.js"></script>
+<script src="assets/js/pages/admin-activity.js"></script>
