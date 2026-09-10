@@ -1,0 +1,383 @@
+/* ==========================================================================
+   responsive.css — the breakpoint layer
+   --------------------------------------------------------------------------
+   Everything that changes below 1180px lives here and nowhere else. Above
+   1180px this file contributes only the bottom-nav rules, which are hidden
+   at that width — so desktop rendering is exactly what it was before
+   Phase 10.
+
+   Ladder (must stay in step with the tokens documented in tokens.css):
+
+       desktop   >= 1180px   full sidebar, full grids, no bottom nav
+       tablet     768-1179   sidebar auto-collapses to the 72px icon rail
+       mobile      < 768     sidebar hidden, bottom nav bar, single column
+
+   Loaded LAST on every page so it overrides without !important.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. Bottom navigation — built at every width, revealed under 768px
+   ========================================================================== */
+
+.bottom-nav {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 80;
+  height: var(--bottom-nav-height);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -2px 12px rgba(15, 31, 25, 0.06);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.bottom-nav-inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: var(--bottom-nav-height);
+}
+
+.bottom-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: var(--weight-medium);
+  color: var(--text-muted);
+  background: none;
+  text-align: center;
+  min-width: 0;
+}
+
+.bottom-tab span {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bottom-tab.is-active {
+  color: var(--primary-hover);
+}
+
+.bottom-tab.is-active svg {
+  stroke: var(--primary);
+}
+
+/* --- More sheet --------------------------------------------------------- */
+
+.more-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: var(--bottom-nav-height);
+  z-index: 79;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  box-shadow: 0 -8px 32px rgba(15, 31, 25, 0.18);
+  padding: 8px 12px 16px;
+  transform: translateY(110%);
+  transition: transform var(--duration-base) var(--ease);
+}
+
+.more-sheet.is-open {
+  transform: none;
+}
+
+.more-grip {
+  width: 40px;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: var(--border);
+  margin: 8px auto 12px;
+}
+
+.more-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 12px;
+  border-radius: var(--radius-control);
+  color: var(--text);
+  font-weight: var(--weight-medium);
+  width: 100%;
+  text-align: left;
+}
+
+.more-link:hover {
+  background: var(--background);
+}
+
+.more-link.is-active {
+  background: var(--mint-fill);
+  color: var(--primary-hover);
+}
+
+.more-scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 31, 25, 0.35);
+  z-index: 78;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-base) var(--ease);
+}
+
+.more-scrim.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* --- Student course tab row (Enrolled / Browse Catalog / Certificates) --- */
+
+.course-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.course-tabs .tab {
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   2. Tablet — 768px to 1179px
+   The sidebar drops to the icon rail by width. The click toggle still works
+   and can expand it back; this only sets the default at this size.
+   ========================================================================== */
+
+@media (max-width: 1179px) {
+
+  .app:not(.is-expanded) .sidebar { width: var(--sidebar-collapsed); }
+
+  .app:not(.is-expanded) .sidebar-head .brand-name,
+  .app:not(.is-expanded) .nav-label,
+  .app:not(.is-expanded) .nav-chevron,
+  .app:not(.is-expanded) .nav-children,
+  .app:not(.is-expanded) .logout-label { display: none; }
+
+  .app:not(.is-expanded) .sidebar-head {
+    justify-content: center;
+    padding: 16px 8px 12px;
+  }
+
+  .app:not(.is-expanded) .nav-item,
+  .app:not(.is-expanded) .logout {
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Grids halve */
+  .kpi-grid,
+  .stat-strip        { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .course-grid,
+  .course-grid-4,
+  .feature-grid,
+  .grid-3            { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .feature-wide      { grid-column: span 2; }
+  .grid-2,
+  .settings-grid,
+  .dash-split        { grid-template-columns: minmax(0, 1fr); }
+
+  .site-footer-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  /* Hero: single column, the decorative dashboard mock steps aside */
+  .hero-inner        { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .hero-mock         { display: none; }
+
+  /* Feed loses its left rail; announcements move under the stream */
+  .feed              { grid-template-columns: minmax(0, 1fr) var(--feed-right); }
+  .feed > .feed-side:first-child { display: none; }
+
+  /* Two-column screens stack */
+  .detail-grid,
+  .player            { grid-template-columns: minmax(0, 1fr); }
+  .detail-aside      { position: static; }
+
+  .catalog           { grid-template-columns: 220px minmax(0, 1fr); }
+  .builder           { grid-template-columns: 180px minmax(0, 1fr); }
+
+  .topbar-title      { width: auto; }
+  .index-panel       { width: 420px; }
+  .index-grid        { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ==========================================================================
+   3. Mobile — under 768px
+   Sidebar disappears entirely and the bottom nav takes over.
+   ========================================================================== */
+
+@media (max-width: 767px) {
+
+  /* --- Shell ------------------------------------------------------------ */
+
+  .sidebar { display: none; }
+
+  .app { display: block; }
+
+  .app-main { min-height: 100vh; }
+
+  /* Room for the fixed bar at the foot of every scrollable surface. */
+  .content,
+  .site-main {
+    padding-bottom: calc(var(--bottom-nav-height) + 24px);
+  }
+
+  .bottom-nav { display: block; }
+
+  .content { padding: 16px var(--content-pad-sm)
+                      calc(var(--bottom-nav-height) + 24px); }
+
+  /* --- Top bars --------------------------------------------------------- */
+
+  .topbar {
+    gap: 10px;
+    padding: 0 var(--content-pad-sm);
+  }
+
+  .topbar-title {
+    width: auto;
+    flex: 1;
+    min-width: 0;
+    font-size: var(--text-lg);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Search collapses to its icon; the field itself is hidden. */
+  .topbar-search { flex: 0 0 auto; }
+  .topbar-search-field { width: auto; }
+  .topbar-search-field .input { display: none; }
+  .topbar-search-field svg {
+    position: static;
+    color: var(--text-muted);
+    padding: 8px;
+    box-sizing: content-box;
+  }
+
+  .topbar-user-meta { display: none; }
+
+  .site-nav-inner { padding: 0 var(--content-pad-sm); }
+  .site-links { display: none; }   /* moved into the bottom bar */
+
+  /* --- Everything to one column ----------------------------------------- */
+
+  .kpi-grid,
+  .stat-strip        { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .course-grid,
+  .course-grid-4,
+  .feature-grid,
+  .grid-2,
+  .grid-3,
+  .settings-grid,
+  .dash-split,
+  .role-row,
+  .site-footer-inner { grid-template-columns: minmax(0, 1fr); }
+
+  .feature-wide      { grid-column: span 1; }
+
+  .rail              { padding: 0 var(--content-pad-sm); }
+  .band              { padding: 40px 0; }
+  .band-title        { font-size: var(--text-2xl); }
+
+  /* --- Feed: one column, rails after the stream ------------------------- */
+
+  .feed              { grid-template-columns: minmax(0, 1fr); }
+  .feed > .feed-side:first-child { display: none; }
+  .feed > .feed-side:last-child  { display: none; }
+  .feed-banner       { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .composer-actions  { padding-left: 0; }
+
+  /* --- Catalogue: filters become a collapsible block -------------------- */
+
+  .catalog           { grid-template-columns: minmax(0, 1fr); }
+
+  /* --- Builder: stepper goes horizontal --------------------------------- */
+
+  .builder           { grid-template-columns: minmax(0, 1fr); }
+  .stepper           { flex-direction: row; overflow-x: auto; padding-bottom: 4px; }
+  .step              { width: auto; flex: 0 0 auto; }
+
+  /* --- Player and detail ------------------------------------------------ */
+
+  .player,
+  .detail-grid       { grid-template-columns: minmax(0, 1fr); }
+  .detail-aside      { position: static; }
+  .detail-title      { font-size: var(--text-2xl); }
+  .learn-grid        { grid-template-columns: minmax(0, 1fr); }
+
+  /* --- Hero ------------------------------------------------------------- */
+
+  .hero              { padding: 40px 0 48px; }
+  .hero-inner        { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .hero-mock         { display: none; }
+  .hero-title        { font-size: var(--text-3xl); }
+  .hero-sub          { font-size: var(--text-base); }
+  .hero-inner .row   { flex-direction: column; align-items: stretch; }
+  .hero-inner .btn   { width: 100%; }
+
+  .trusted-row       { gap: 20px; font-size: var(--text-base); }
+
+  /* --- Sign-in: panel above the card ------------------------------------ */
+
+  .signin            { grid-template-columns: minmax(0, 1fr); min-height: auto; }
+  .signin-panel      { padding: 32px var(--content-pad-sm); gap: 24px; min-height: 320px; }
+  .signin-headline   { font-size: var(--text-2xl); }
+  .signin-form       { padding: 32px var(--content-pad-sm)
+                                calc(var(--bottom-nav-height) + 32px); }
+
+  /* --- Quiz and results ------------------------------------------------- */
+
+  .result-summary    { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .quiz-card         { padding: 20px; }
+  .quiz-text         { font-size: var(--text-lg); }
+
+  /* --- Page furniture --------------------------------------------------- */
+
+  .page-head         { flex-direction: column; align-items: stretch; gap: 12px; }
+  .toolbar           { gap: 10px; }
+  .card              { padding: 16px; }
+  .cta               { padding: 36px 20px; }
+  .cta-title         { font-size: var(--text-2xl); }
+
+  /* Tables keep their shape and scroll sideways inside their card. */
+  .table-scroll      { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table th,
+  .table td          { white-space: nowrap; }
+
+  /* Panels and drawers become full-width sheets. */
+  .panel,
+  .drawer            { width: 100%; max-width: 100%; }
+
+  /* Screen index sits above the bottom bar. */
+  .index-dock        { right: 12px; bottom: calc(var(--bottom-nav-height) + 12px); }
+  .index-panel       { width: calc(100vw - 24px); }
+  .index-grid        { grid-template-columns: minmax(0, 1fr); }
+
+  /* Toast clears the bottom bar. */
+  .toast             { bottom: calc(var(--bottom-nav-height) + 16px); width: calc(100% - 32px); }
+
+  /* The mobile showcase page is itself a desktop artefact. */
+  .frames            { flex-direction: column; gap: 32px; }
+  .library           { padding: 24px var(--content-pad-sm) 60px; }
+}
+
+/* ==========================================================================
+   4. Narrow phones — under 400px
+   ========================================================================== */
+
+@media (max-width: 399px) {
+  .kpi-grid,
+  .stat-strip        { grid-template-columns: minmax(0, 1fr); }
+  .bottom-tab        { font-size: 9px; }
+  .hero-title        { font-size: var(--text-2xl); }
+}
