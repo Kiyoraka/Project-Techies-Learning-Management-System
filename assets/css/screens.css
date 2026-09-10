@@ -858,3 +858,31 @@
   background: var(--chart-2);
   opacity: 0.3;
 }
+
+
+/* ==========================================================================
+   Lesson player (student-player.html)
+   ========================================================================== */
+
+.player {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: var(--gutter);
+  align-items: start;
+}
+
+.player-video {
+  aspect-ratio: 16 / 9;
+  max-width: 100%;
+  border-radius: var(--radius-card);
+  background: var(--sidebar-active);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player-video .play-badge {
+  width: 68px;
+  height: 68px;
+}

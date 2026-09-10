@@ -1,0 +1,106 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson — Techies LMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/controls.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/screens.css">
+
+<body data-role="student" data-route="stu.player" data-title="Lesson">
+
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="app-main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content">
+
+      <div class="player">
+        <div>
+          <div class="player-video" id="player-video"></div>
+
+          <div class="page-head" style="margin-top:20px;align-items:center">
+            <div id="player-heading"></div>
+            <div class="row" id="player-actions"></div>
+          </div>
+
+          <div class="tabs" data-tabs="player">
+            <button class="tab is-active" data-tab="Overview">Overview</button>
+            <button class="tab" data-tab="Resources">Resources</button>
+            <button class="tab" data-tab="Q and A">Q and A</button>
+            <button class="tab" data-tab="Notes">Notes</button>
+          </div>
+
+          <div data-tab-panel="player:Overview">
+            <div class="card">
+              <p style="line-height:var(--leading-relaxed);color:var(--text-muted)">Lists and tuples are the two sequence types you will reach for most often. In this lesson we build both from scratch, index and slice them, and see exactly where a tuple protects you from a bug a list would let through.</p>
+            </div>
+          </div>
+
+          <div data-tab-panel="player:Resources" hidden>
+            <div class="card stack-sm" id="player-resources"></div>
+          </div>
+
+          <div data-tab-panel="player:Q and A" hidden>
+            <div class="card">
+              <div class="row" style="gap:12px;align-items:flex-start">
+                <span class="avatar avatar-sm" style="background:var(--sidebar-active)">AH</span>
+                <input class="input input-pill" placeholder="Ask about this lesson">
+                <button class="btn btn-primary btn-sm" data-toast="message">Ask</button>
+              </div>
+              <div class="divider"></div>
+              <div class="comment">
+                <span class="avatar avatar-sm" style="background:#0EA5A4">SN</span>
+                <div class="comment-bubble">
+                  <strong class="strong">Siti Nurhaliza</strong> <span class="muted">2 days ago</span>
+                  <div style="margin-top:2px">Is a tuple always faster than a list, or only for large collections?</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div data-tab-panel="player:Notes" hidden>
+            <div class="card">
+              <label class="label" for="player-notes">Your notes</label>
+              <textarea class="textarea" id="player-notes" placeholder="Notes are private to you"></textarea>
+              <div class="row" style="justify-content:flex-end;margin-top:12px">
+                <button class="btn btn-primary btn-sm" data-toast="save">Save notes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside id="player-rail"></aside>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div id="overlays"></div>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shell.js"></script>
+<script src="assets/js/pages/student-player.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  qs('#player-resources').innerHTML = [
+    ['file', 'Data types cheat sheet.pdf', '240 KB'],
+    ['file', 'lists-and-tuples-examples.py', '4 KB'],
+    ['link', 'Official Python sequence docs', 'docs.python.org']
+  ].map(function (r) {
+    return '<div class="row" style="gap:10px">' +
+      icon(r[0], 16, { stroke: 'var(--text-muted)' }) +
+      '<span class="small" style="flex:1">' + esc(r[1]) + '</span>' +
+      '<span class="tiny muted">' + esc(r[2]) + '</span>' +
+      '<button class="btn btn-secondary btn-sm" data-toast="download">Download</button>' +
+      '</div>';
+  }).join('');
+});
+</script>
