@@ -25,8 +25,14 @@
           <h1 class="page-title">My Courses</h1>
           <p class="page-sub">Everything you are enrolled in, in progress and finished.</p>
         </div>
-        <a class="btn btn-secondary" href="student-catalog.html">Browse Catalog</a>
       </div>
+
+      <!-- One bottom-nav slot reaches all three course screens through this row. -->
+      <nav class="course-tabs" aria-label="My Courses">
+        <a class="tab is-active" href="student-enrolled.html">Enrolled</a>
+        <a class="tab" href="student-catalog.html">Browse Catalog</a>
+        <a class="tab" href="student-certificates.html">Certificates</a>
+      </nav>
 
       <div class="toolbar">
         <div class="pills" id="enrolled-filter"></div>

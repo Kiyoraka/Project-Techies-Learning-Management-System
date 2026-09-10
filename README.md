@@ -13,6 +13,8 @@ the reference the real build will be measured against — it is **not** the prod
 
 Double-click **`index.html`**. That is the whole setup.
 
+It works from phone width up — see **Responsive behaviour** below.
+
 Every page is standalone and opens straight from the filesystem. If you would rather
 serve it (useful for sharing over a LAN, or if your browser is strict about local
 files):
@@ -74,6 +76,74 @@ standalone file with no shared session.
 
 ---
 
+## Responsive behaviour
+
+The prototype reflows. There are three tiers:
+
+```
+  >= 1180px            768 - 1179px              < 768px
+  DESKTOP              TABLET                    MOBILE
+  ---------            ----------                --------
+  260px sidebar        sidebar collapses to      sidebar hidden
+  full grids           the 72px icon rail        bottom nav bar
+  no bottom nav        grids halve               single column
+```
+
+Desktop rendering above 1180px is unchanged from the original desktop-only
+build — every breakpoint lives in `assets/css/responsive.css` and none of it
+applies at that width.
+
+### Bottom navigation
+
+Below 768px the sidebar is replaced by a fixed bottom bar. A bar holds four
+slots; Student and the landing site have exactly four destinations, so Admin
+and Instructor put their remainder behind a **More** sheet that slides up.
+
+| Surface | Bar | Behind More |
+|---|---|---|
+| Landing | Home, Courses, Community, Sign In | — |
+| Student | Home, My Courses, Community, Settings | — |
+| Admin | Dashboard, Community, Users, **More** | Activity Log, Course Oversight, Settings |
+| Instructor | Dashboard, Community, Courses, **More** | Create Course, Quiz, Assignment, Student Management, Settings |
+
+The Student **My Courses** slot reaches all three course screens — Enrolled,
+Browse Catalog and Certificates — through a tab row carried at the top of each
+of those pages. That row is visible at every width, not only on mobile.
+
+A slot stays lit across related routes, so My Courses remains active while a
+student is in the lesson player, taking a quiz, or reading their results.
+
+### What changes on a phone
+
+- Sidebar out, bottom bar in; the top bar keeps title, search icon, bell and avatar
+- KPI and stats grids go 2×2 (single column below 360px)
+- Course grids, feature tiles, settings and two-column screens go single column
+- The community feed drops both rails and shows the stream alone
+- The landing hero drops its decorative dashboard mock; buttons go full width
+- Sign-in becomes the panel above the card
+- The course builder's stepper turns horizontal and scrolls
+- Tables keep their shape and scroll sideways inside their card, so dense admin
+  data stays readable rather than being crushed
+- Side panels and drawers become full-width sheets
+
+### Verifying it yourself
+
+Browser devtools device toolbar is the easy way. Note that headless Chrome and
+Edge clamp `--window-size` to roughly a 492px minimum viewport, so a smaller
+`--screenshot` **crops** rather than reflows — it will look broken when it is
+not. Measure inside the page instead:
+
+```js
+document.documentElement.scrollWidth   // must be <= window.innerWidth
+window.matchMedia('(max-width: 767px)').matches
+document.querySelectorAll('.bottom-tab').length   // 4
+```
+
+At a true 390px viewport this build reports `scrollWidth` 375 against
+`innerWidth` 390, zero elements wider than the viewport, and four bottom tabs.
+
+---
+
 ## File layout
 
 ```
@@ -87,6 +157,7 @@ assets/css/
   layout.css              the two shells and overlays
   screens-public.css      landing and component-library one-offs
   screens-app.css         signed-in screen one-offs
+  responsive.css          every breakpoint, bottom nav and More sheet
 assets/js/
   brand.js                the product name — see below
   data.js                 all sample content
