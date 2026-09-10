@@ -1,0 +1,668 @@
+/* ==========================================================================
+   components.css — cards, tables, tabs, progress, panels and furniture
+   --------------------------------------------------------------------------
+   The compositional pieces. Interactive primitives live in controls.css,
+   which must be loaded first. The Component Library artboard
+   (components.html) is the visual contract for both files.
+
+   Requires tokens.css and controls.css.
+   ========================================================================== */
+
+/* ==========================================================================
+   4. Cards
+   ========================================================================== */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 20px;
+}
+
+.card-flush {
+  padding: 0;
+  overflow: hidden;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.card-title {
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+}
+
+.card-link {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  color: var(--primary);
+}
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* --- KPI card ------------------------------------------------------------ */
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gutter);
+}
+
+.kpi-label {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.kpi-value {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.02em;
+  margin: 6px 0 4px;
+}
+
+.kpi-delta {
+  font-size: var(--text-2xs);
+  color: var(--primary-hover);
+  font-weight: var(--weight-semibold);
+}
+
+.kpi-delta-muted {
+  color: var(--text-muted);
+  font-weight: var(--weight-regular);
+}
+
+/* --- Course card --------------------------------------------------------- */
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gutter);
+  align-items: start;
+}
+
+.course-grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.course-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-thumb {
+  height: 130px;
+  position: relative;
+  overflow: hidden;
+  background: var(--primary);
+}
+
+/* The soft white disc bleeding off the bottom-right of every thumbnail. */
+.course-thumb::after {
+  content: '';
+  position: absolute;
+  right: -30px;
+  bottom: -40px;
+  width: 130px;
+  height: 130px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.course-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.course-body .chip {
+  align-self: flex-start;
+}
+
+.course-title {
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+  line-height: 1.35;
+}
+
+.course-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-2xs);
+  color: var(--text-muted);
+}
+
+.course-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.course-price {
+  font-weight: var(--weight-semibold);
+  color: var(--primary-hover);
+}
+
+/* ==========================================================================
+   5. Tables
+   ========================================================================== */
+
+.table-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.table th {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 12px 16px;
+  background: var(--background);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--text-base);
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr:hover td {
+  background: var(--background);
+}
+
+.table tbody tr.is-selected td {
+  background: var(--mint-fill);
+}
+
+.table-dense td {
+  padding: 10px 16px;
+  font-size: var(--text-sm);
+}
+
+.table-actions {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+.cell-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cell-sub {
+  font-size: var(--text-2xs);
+  color: var(--text-muted);
+}
+
+.table-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   6. Tabs, pills and steppers
+   ========================================================================== */
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 14px;
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  color: var(--text-muted);
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+
+.tab:hover {
+  color: var(--text);
+}
+
+.tab.is-active {
+  color: var(--primary-hover);
+  background: var(--mint-fill);
+  border-bottom-color: var(--primary);
+  border-radius: var(--radius-control) var(--radius-control) 0 0;
+}
+
+.tab-count {
+  margin-left: 6px;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  border-radius: var(--radius-pill);
+  padding: 7px 14px;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.pill:hover {
+  border-color: var(--mint-border);
+}
+
+.pill.is-active {
+  background: var(--primary);
+  color: var(--on-dark);
+  border-color: var(--primary);
+}
+
+/* --- Stepper ------------------------------------------------------------- */
+
+.stepper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-control);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-base);
+  width: 100%;
+  text-align: left;
+}
+
+.step-n {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-pill);
+  background: var(--background);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-2xs);
+  flex-shrink: 0;
+}
+
+.step.is-done {
+  background: var(--mint-fill);
+  color: var(--primary-hover);
+  border-color: var(--mint-border);
+}
+
+.step.is-done .step-n {
+  background: var(--surface);
+  color: var(--primary-hover);
+}
+
+.step.is-active {
+  background: var(--primary);
+  color: var(--on-dark);
+  border-color: var(--primary);
+}
+
+.step.is-active .step-n {
+  background: rgba(255, 255, 255, 0.25);
+  color: var(--on-dark);
+}
+
+/* ==========================================================================
+   7. Progress
+   ========================================================================== */
+
+.bar {
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--border);
+  overflow: hidden;
+  width: 100%;
+}
+
+.bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--primary);
+}
+
+.bar-lg {
+  height: 8px;
+}
+
+.ring-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring-value {
+  position: absolute;
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-sm);
+}
+
+.ring-value-lg {
+  font-size: var(--text-2xl);
+}
+
+/* ==========================================================================
+   8. Accordion
+   ========================================================================== */
+
+.accordion-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.accordion-item + .accordion-item {
+  margin-top: 10px;
+}
+
+.accordion-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-base);
+  background: var(--surface);
+}
+
+.accordion-head:hover {
+  background: var(--background);
+}
+
+.accordion-chevron {
+  transition: transform 0.15s;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.accordion-item.is-open .accordion-chevron {
+  transform: rotate(180deg);
+}
+
+.accordion-body {
+  border-top: 1px solid var(--border);
+}
+
+.accordion-item:not(.is-open) .accordion-body {
+  display: none;
+}
+
+.lesson-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 16px;
+  font-size: var(--text-base);
+  border-bottom: 1px solid var(--border);
+}
+
+.lesson-row:last-child {
+  border-bottom: none;
+}
+
+.lesson-row:hover {
+  background: var(--background);
+}
+
+.lesson-row.is-current {
+  background: var(--mint-fill);
+}
+
+.lesson-row.is-done .lesson-title {
+  color: var(--text-muted);
+}
+
+.lesson-title {
+  flex: 1;
+  min-width: 0;
+}
+
+.lesson-mins {
+  font-size: var(--text-2xs);
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   9. Empty state
+   ========================================================================== */
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  padding: 40px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+}
+
+.empty-badge {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-pill);
+  background: var(--mint-fill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-title {
+  font-weight: var(--weight-semibold);
+}
+
+.empty-hint {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   10. Panels, drawers and backdrops
+   ========================================================================== */
+
+.panel-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 31, 25, 0.2);
+  z-index: 60;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-base) var(--ease);
+}
+
+.panel.is-open ~ .panel-backdrop,
+.drawer.is-open ~ .panel-backdrop,
+body.has-panel .panel-backdrop {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.panel,
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 420px;
+  max-width: 92vw;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  box-shadow: var(--shadow-panel);
+  z-index: 70;
+  transform: translateX(100%);
+  transition: transform var(--duration-base) var(--ease);
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer {
+  width: 520px;
+}
+
+.panel.is-open,
+.drawer.is-open {
+  transform: none;
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.panel-title {
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+}
+
+.panel-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.panel-foot {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+/* ==========================================================================
+   11. Section furniture
+   ========================================================================== */
+
+.section-label {
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  margin-bottom: 16px;
+}
+
+.page-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.page-title {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.02em;
+}
+
+.page-sub {
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.toolbar-grow {
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+}
+
+.toolbar-grow svg {
+  position: absolute;
+  left: 12px;
+  top: 11px;
+}
+
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gutter); align-items: start; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); align-items: start; }
+.stack  { display: flex; flex-direction: column; gap: var(--gutter); }
+.stack-sm { display: flex; flex-direction: column; gap: 12px; }
+.row    { display: flex; align-items: center; gap: 12px; }
+.row-between { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+
+.muted { color: var(--text-muted); }
+.small { font-size: var(--text-sm); }
+.tiny  { font-size: var(--text-2xs); }
+.strong { font-weight: var(--weight-semibold); }
+.mt-auto { margin-top: auto; }
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 16px 0;
+}
