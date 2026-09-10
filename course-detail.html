@@ -1,0 +1,73 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Course Detail — Techies LMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/controls.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/screens.css">
+
+<body data-role="public" data-route="detail" data-title="Course Detail">
+
+<div class="site">
+  <header class="site-nav" id="topnav"></header>
+
+  <main class="site-main">
+
+    <!-- ================= Banner ================= -->
+    <section class="detail-banner">
+      <div class="rail">
+        <a class="detail-back" href="courses.html">&larr; Back to catalog</a>
+        <div id="detail-head"></div>
+      </div>
+    </section>
+
+    <!-- ================= Body ================= -->
+    <div class="rail" style="padding-top:32px;padding-bottom:64px">
+      <div class="detail-grid">
+
+        <div class="stack">
+          <section class="card">
+            <h2 class="card-title" style="margin-bottom:10px">About this course</h2>
+            <p style="line-height:var(--leading-relaxed);color:var(--text-muted)">An eight-week programme for working adults who want to automate their daily tasks. You will start from installing Python and finish by writing scripts that read spreadsheets, call APIs and send reports. Every module ends with a quiz; the programme ends with a graded project reviewed by your instructor.</p>
+          </section>
+
+          <section class="card">
+            <h2 class="card-title" style="margin-bottom:14px">What you will learn</h2>
+            <div class="learn-grid" id="detail-learn"></div>
+          </section>
+
+          <section>
+            <div class="page-head" style="margin-bottom:14px">
+              <div>
+                <h2 class="card-title">Curriculum</h2>
+                <p class="tiny muted" id="detail-curriculum-meta"></p>
+              </div>
+            </div>
+            <div id="detail-curriculum"></div>
+          </section>
+        </div>
+
+        <aside class="detail-aside">
+          <div class="card" id="detail-buy"></div>
+        </aside>
+
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+</div>
+
+<div id="overlays"></div>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shell.js"></script>
+<script src="assets/js/pages/course-detail.js"></script>

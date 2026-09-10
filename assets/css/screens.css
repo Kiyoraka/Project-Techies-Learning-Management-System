@@ -510,3 +510,99 @@
   border-radius: var(--radius-pill);
   padding: 1px 8px;
 }
+
+
+/* ==========================================================================
+   Course detail (course-detail.html)
+   ========================================================================== */
+
+.detail-banner {
+  background: linear-gradient(160deg, var(--mint-fill) 0%, var(--surface) 70%);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 0 36px;
+}
+
+.detail-back {
+  display: inline-block;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  margin-bottom: 18px;
+}
+
+.detail-title {
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  max-width: 760px;
+}
+
+.detail-sub {
+  color: var(--text-muted);
+  font-size: var(--text-lg);
+  margin-top: 10px;
+  max-width: 680px;
+}
+
+.detail-meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 32px;
+  align-items: start;
+}
+
+.detail-aside {
+  position: sticky;
+  top: calc(var(--topbar-height) + 24px);
+}
+
+.detail-thumb {
+  height: 150px;
+  border-radius: var(--radius-md);
+  margin: -4px 0 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.detail-thumb::after {
+  content: '';
+  position: absolute;
+  right: -30px;
+  bottom: -40px;
+  width: 140px;
+  height: 140px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.detail-price {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.02em;
+}
+
+.learn-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 24px;
+}
+
+.learn-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+}
+
+.learn-item svg { margin-top: 2px; flex-shrink: 0; }
