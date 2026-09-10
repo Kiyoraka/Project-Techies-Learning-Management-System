@@ -1,0 +1,124 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard — Techies LMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/controls.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/screens.css">
+
+<body data-role="admin" data-route="admin.dashboard" data-title="Dashboard">
+
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="app-main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content">
+
+      <div class="kpi-grid" id="kpis"></div>
+
+      <div class="dash-split" style="margin-top:24px">
+        <section class="card">
+          <div class="card-head">
+            <h2 class="card-title">Enrollments over time</h2>
+            <span class="chip chip-category">Last 6 months</span>
+          </div>
+          <div id="chart"></div>
+        </section>
+
+        <section class="card">
+          <div class="card-head">
+            <h2 class="card-title">Recent activity</h2>
+            <a class="card-link" href="admin-activity.html">See all</a>
+          </div>
+          <div class="card-list" id="recent-activity"></div>
+        </section>
+      </div>
+
+      <section class="table-card" style="margin-top:24px">
+        <div class="card-head" style="padding:20px 20px 0;margin-bottom:14px">
+          <h2 class="card-title">Recent sign-ups</h2>
+          <a class="card-link" href="admin-users.html">Manage users</a>
+        </div>
+        <table class="table">
+          <thead>
+            <tr><th>Student</th><th>Enrolled in</th><th>Status</th><th>Joined</th></tr>
+          </thead>
+          <tbody id="signups"></tbody>
+        </table>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div id="overlays"></div>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shell.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  /* --- KPI cards --- */
+  qs('#kpis').innerHTML = KPIS.admin.map(function (k) {
+    return '<div class="card">' +
+      '<div class="kpi-label">' + esc(k[0]) + '</div>' +
+      '<div class="kpi-value">' + esc(k[1]) + '</div>' +
+      '<div class="kpi-delta">' + esc(k[2]) + '</div>' +
+      '</div>';
+  }).join('');
+
+  /* --- Enrolments chart, geometry copied from the artboard SVG --- */
+  const c = ENROLMENTS_CHART;
+  qs('#chart').innerHTML =
+    '<svg class="chart" viewBox="' + c.viewBox + '" preserveAspectRatio="none">' +
+      '<path d="' + c.area + '" fill="var(--chart-area-from)"></path>' +
+      c.series.map(function (s) {
+        return '<polyline points="' + s.points + '" fill="none" stroke="' + s.color +
+          '" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>';
+      }).join('') +
+    '</svg>' +
+    '<div class="chart-axis">' + c.months.map(function (m) {
+      return '<span>' + m + '</span>';
+    }).join('') + '</div>' +
+    '<div class="row" style="margin-top:14px;gap:20px">' +
+      '<span class="row tiny muted" style="gap:6px"><span class="legend" style="background:var(--chart-1)"></span>New enrollments</span>' +
+      '<span class="row tiny muted" style="gap:6px"><span class="legend" style="background:var(--chart-2)"></span>Completions</span>' +
+    '</div>';
+
+  /* --- Recent activity: the five newest log rows --- */
+  qs('#recent-activity').innerHTML = ACTIVITY.slice(0, 5).map(function (a) {
+    return '<div class="row" style="align-items:flex-start;gap:10px">' +
+      avatar(initialsOf(a.user), 'var(--sidebar-active)', 28) +
+      '<div style="flex:1;min-width:0">' +
+        '<div class="small"><strong class="strong">' + esc(a.user) + '</strong> ' +
+          esc(a.action.toLowerCase()) + ' <span class="strong" style="color:var(--primary)">' + esc(a.target) + '</span></div>' +
+        '<div class="tiny muted" style="margin-top:2px">' + esc(a.time) + '</div>' +
+      '</div>' +
+      '</div>';
+  }).join('');
+
+  /* --- Recent sign-ups: the four newest students --- */
+  qs('#signups').innerHTML = USERS
+    .filter(function (u) { return u.role === 'Student'; })
+    .slice(0, 4)
+    .map(function (u) {
+      return '<tr>' +
+        '<td><div class="cell-user">' + avatar(initialsOf(u.name), u.color, 32) +
+          '<div><div class="strong">' + esc(u.name) + '</div>' +
+          '<div class="cell-sub">' + esc(u.email) + '</div></div></div></td>' +
+        '<td class="small">' + esc(SIGNUP_COURSE[u.id] || '—') + '</td>' +
+        '<td>' + (u.on
+          ? '<span class="chip chip-published">Active</span>'
+          : '<span class="chip chip-draft">Inactive</span>') + '</td>' +
+        '<td class="muted small">' + esc(u.joined) + '</td>' +
+      '</tr>';
+    }).join('');
+});
+</script>
