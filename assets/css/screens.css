@@ -886,3 +886,129 @@
   width: 68px;
   height: 68px;
 }
+
+
+/* ==========================================================================
+   Quiz attempt and results (student-quiz.html, student-quiz-result.html)
+   ========================================================================== */
+
+.quiz-shell {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.quiz-card {
+  margin: 16px 0 20px;
+  padding: 28px;
+}
+
+.quiz-text {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  line-height: 1.35;
+}
+
+.quiz-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.quiz-choice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  padding: 14px 16px;
+  font-size: var(--text-base);
+}
+
+.quiz-choice:hover {
+  border-color: var(--mint-border);
+  background: var(--background);
+}
+
+.quiz-choice.is-chosen {
+  background: var(--mint-fill);
+  border-color: var(--primary);
+  font-weight: var(--weight-medium);
+}
+
+.radio-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--primary);
+  display: block;
+}
+
+.result-summary {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 32px;
+}
+
+.review-item { padding: 16px 20px; }
+
+.review-mark {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.review-mark.is-ok  { background: var(--primary); }
+.review-mark.is-bad { background: var(--danger); }
+
+/* ==========================================================================
+   Certificates (student-certificates.html)
+   ========================================================================== */
+
+.cert-sheet {
+  background: var(--surface);
+  border: 2px solid var(--mint-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 28px;
+  text-align: center;
+}
+
+.cert-name {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  margin: 10px 0 6px;
+}
+
+.cert-sheet .cert-course {
+  font-size: var(--text-lg);
+  color: var(--primary-hover);
+  margin: 8px 0 20px;
+}
+
+.cert-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+
+.google-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}

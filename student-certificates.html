@@ -1,0 +1,77 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Certificates — Techies LMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/controls.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/screens.css">
+
+<body data-role="student" data-route="stu.certs" data-title="Certificates">
+
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="app-main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content">
+
+      <div class="page-head">
+        <div>
+          <h1 class="page-title">Certificates</h1>
+          <p class="page-sub">Reach 100 percent on a course and a verifiable PDF is issued automatically.</p>
+        </div>
+      </div>
+
+      <div class="grid-2" id="cert-grid"></div>
+
+      <div class="card" style="margin-top:24px">
+        <div class="row" style="gap:14px">
+          <span class="empty-badge" style="width:44px;height:44px" id="cert-next-icon"></span>
+          <div style="flex:1">
+            <div class="strong">Next certificate</div>
+            <div class="tiny muted">Python Competency Program &middot; 68 percent complete</div>
+          </div>
+          <a class="btn btn-primary btn-sm" href="student-player.html">Continue course</a>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div id="overlays"></div>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shell.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const who = SESSION_USER.student;
+
+  qs('#cert-next-icon').innerHTML = icon('grad', 22, { stroke: 'var(--primary)' });
+
+  qs('#cert-grid').innerHTML = CERTIFICATES.map(function (c) {
+    return '<article class="cert-card">' +
+      '<div class="cert-sheet" style="border-color:' + c.color + '">' +
+        '<div class="cert-eyebrow">CERTIFICATE OF COMPLETION</div>' +
+        '<div class="cert-name">' + esc(who.name) + '</div>' +
+        '<div class="tiny muted">has successfully completed</div>' +
+        '<div class="cert-course">' + esc(c.course) + '</div>' +
+        '<div class="cert-foot">' +
+          '<span class="tiny muted">Issued ' + esc(c.date) + '</span>' +
+          '<span class="cert-id">' + esc(c.id) + '</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="row" style="gap:8px;margin-top:14px">' +
+        '<button class="btn btn-primary btn-sm" data-toast="download">Download PDF</button>' +
+        '<button class="btn btn-secondary btn-sm" data-toast="share">Share</button>' +
+      '</div>' +
+    '</article>';
+  }).join('');
+});
+</script>

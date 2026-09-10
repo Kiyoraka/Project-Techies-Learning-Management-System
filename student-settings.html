@@ -1,0 +1,203 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settings — Techies LMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/controls.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/screens.css">
+
+<body data-role="student" data-route="stu.settings" data-title="Settings">
+
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="app-main">
+    <header class="topbar" id="topbar"></header>
+    <main class="content">
+
+      <div class="page-head">
+        <div>
+          <h1 class="page-title">Settings</h1>
+          <p class="page-sub">Your profile, password, connected account and notifications.</p>
+        </div>
+        <button class="btn btn-primary" data-toast="save">Save changes</button>
+      </div>
+
+      <div class="tabs" data-tabs="stu">
+        <button class="tab is-active" data-tab="Profile">Profile</button>
+        <button class="tab" data-tab="Password">Password</button>
+        <button class="tab" data-tab="Google account">Google account</button>
+        <button class="tab" data-tab="Notifications">Notifications</button>
+      </div>
+
+      <!-- ================= Profile ================= -->
+      <div data-tab-panel="stu:Profile">
+        <div class="settings-grid">
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Your details</h2>
+            <div class="row" style="gap:14px;margin-bottom:20px" id="stu-avatar-row"></div>
+            <div class="field">
+              <label class="label" for="s-name">Full name</label>
+              <input class="input" id="s-name" value="Amirul Hakim">
+            </div>
+            <div class="field">
+              <label class="label" for="s-email">Email</label>
+              <input class="input" id="s-email" type="email" value="amirul.hakim@gmail.com">
+            </div>
+            <div class="field">
+              <label class="label" for="s-phone">Phone</label>
+              <input class="input" id="s-phone" value="+60 12-345 6789">
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Learning preferences</h2>
+            <div class="field">
+              <label class="label" for="s-lang">Interface language</label>
+              <select class="select" id="s-lang">
+                <option>English</option><option>Bahasa Melayu</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="label" for="s-goal">Weekly learning goal</label>
+              <select class="select" id="s-goal">
+                <option>2 hours</option><option selected>5 hours</option><option>10 hours</option>
+              </select>
+            </div>
+            <div class="toggle-row">
+              <div><div class="strong">Autoplay next lesson</div>
+                <div class="tiny muted">Continue automatically when a video ends</div></div>
+              <button class="toggle" data-toggle="autoplay" role="switch" aria-checked="true"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= Password ================= -->
+      <div data-tab-panel="stu:Password" hidden>
+        <div class="settings-grid">
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Change password</h2>
+            <div class="field">
+              <label class="label" for="s-old">Current password</label>
+              <input class="input" id="s-old" type="password" placeholder="••••••••">
+            </div>
+            <div class="field">
+              <label class="label" for="s-new">New password</label>
+              <input class="input" id="s-new" type="password" placeholder="At least 8 characters">
+            </div>
+            <div class="field">
+              <label class="label" for="s-confirm">Confirm new password</label>
+              <input class="input" id="s-confirm" type="password">
+            </div>
+            <button class="btn btn-primary" data-toast="save">Update password</button>
+          </div>
+
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Sessions</h2>
+            <div class="stack-sm small">
+              <div class="row-between"><span>Chrome on Windows &middot; Kelantan</span><span class="chip chip-published">This device</span></div>
+              <div class="row-between"><span class="muted">Safari on iPhone &middot; 3 days ago</span>
+                <button class="btn btn-secondary btn-sm" data-toast="save">Sign out</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= Google account ================= -->
+      <div data-tab-panel="stu:Google account" hidden>
+        <div class="settings-grid">
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Connected account</h2>
+            <div class="row" style="gap:12px" id="stu-google"></div>
+            <div class="divider"></div>
+            <p class="small muted">Disconnecting means signing in with your email and password instead.</p>
+            <button class="btn btn-danger btn-sm" style="margin-top:12px" data-toast="save">Disconnect</button>
+          </div>
+
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Sign-in method</h2>
+            <div class="toggle-row">
+              <div><div class="strong">Use Google to sign in</div>
+                <div class="tiny muted">One click, no password</div></div>
+              <button class="toggle" data-toggle="google" role="switch" aria-checked="true"></button>
+            </div>
+            <div class="toggle-row">
+              <div><div class="strong">Two-factor authentication</div>
+                <div class="tiny muted">Code from your authenticator app</div></div>
+              <button class="toggle" data-toggle="twofa" role="switch" aria-checked="false"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= Notifications ================= -->
+      <div data-tab-panel="stu:Notifications" hidden>
+        <div class="settings-grid">
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Email</h2>
+            <div class="toggle-row">
+              <div><div class="strong">Course announcements</div>
+                <div class="tiny muted">From your instructors</div></div>
+              <button class="toggle" data-toggle="emailNotif" role="switch" aria-checked="true"></button>
+            </div>
+            <div class="toggle-row">
+              <div><div class="strong">Deadline reminders</div>
+                <div class="tiny muted">Two days before anything is due</div></div>
+              <button class="toggle" data-toggle="deadlines" role="switch" aria-checked="true"></button>
+            </div>
+            <div class="toggle-row">
+              <div><div class="strong">Weekly digest</div>
+                <div class="tiny muted">Community highlights every Monday</div></div>
+              <button class="toggle" data-toggle="weekly" role="switch" aria-checked="false"></button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 class="card-title" style="margin-bottom:16px">Community</h2>
+            <div class="toggle-row">
+              <div><div class="strong">Replies to my posts</div>
+                <div class="tiny muted">Someone comments on something you wrote</div></div>
+              <button class="toggle" data-toggle="mentions" role="switch" aria-checked="true"></button>
+            </div>
+            <div class="toggle-row">
+              <div><div class="strong">Push notifications</div>
+                <div class="tiny muted">Browser alerts while signed in</div></div>
+              <button class="toggle" data-toggle="pushNotif" role="switch" aria-checked="false"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div id="overlays"></div>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shell.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const who = SESSION_USER.student;
+
+  qs('#stu-avatar-row').innerHTML =
+    avatar(who.initials, '#34D399', 64) +
+    '<div><div class="strong">' + esc(who.name) + '</div>' +
+    '<div class="tiny muted">Joined 28 Aug 2026</div>' +
+    '<button class="btn btn-secondary btn-sm" style="margin-top:8px">Change photo</button></div>';
+
+  qs('#stu-google').innerHTML =
+    '<span class="google-badge">' + iconGoogle(22) + '</span>' +
+    '<div style="flex:1">' +
+      '<div class="strong small">amirul.hakim@gmail.com</div>' +
+      '<div class="tiny" style="color:var(--primary-hover);font-weight:600">Connected &middot; since 28 Aug 2026</div>' +
+    '</div>';
+});
+</script>
