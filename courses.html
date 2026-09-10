@@ -1,0 +1,61 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Courses — Techies LMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/controls.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/screens.css">
+
+<body data-role="public" data-route="courses" data-title="Courses">
+
+<div class="site">
+  <header class="site-nav" id="topnav"></header>
+
+  <main class="site-main">
+    <div class="rail" style="padding-top:40px;padding-bottom:64px">
+
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">Catalog</div>
+          <h1 class="band-title">Browse courses</h1>
+          <p class="band-sub">Video courses, quizzes and certificates from Malaysian instructors. Free and paid.</p>
+        </div>
+      </div>
+
+      <div class="catalog">
+        <aside id="catalog-filters"></aside>
+
+        <div>
+          <div class="toolbar">
+            <div class="toolbar-grow" id="catalog-search-wrap"></div>
+            <span class="muted small" id="catalog-count"></span>
+          </div>
+          <div id="catalog-grid"></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer" id="site-footer"></footer>
+</div>
+
+<div id="overlays"></div>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shell.js"></script>
+<script src="assets/js/pages/courses.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  qs('#catalog-search-wrap').innerHTML =
+    icon('search', 16, { stroke: 'var(--text-muted)' }) +
+    '<input class="input input-search" id="catalog-search" placeholder="Search courses">';
+});
+</script>
